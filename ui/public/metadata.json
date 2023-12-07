@@ -1,19 +1,19 @@
 {
-  "name": "kickstart",
+  "name": "paperless",
   "description": {
-    "en": "My kickstart module"
+    "en": "PAperless ngx"
   },
   "categories": [],
   "authors": [
     {
-      "name": "Name Surname",
-      "email": "author@yourmail.org"
+      "name": "MArtin Bhuong",
+      "email": "martin@genius.ke"
     }
   ],
   "docs": {
     "documentation_url": "https://docs.kickstart.com/",
-    "bug_url": "https://github.com/NethServer/dev",
-    "code_url": "https://github.com/author/ns8-kickstart"
+    "bug_url": "https://github.com/compgeniuses/ns8-paperless-ngx",
+    "code_url": "https://github.com/compgeniuses/ns8-paperless-ngx"
   },
-  "source": "ghcr.io/nethserver/kickstart"
+  "source": "ghcr.io/compgeniuses/ns8-paperless-ngx"
 }

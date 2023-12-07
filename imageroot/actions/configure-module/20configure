@@ -17,6 +17,20 @@ request = json.load(sys.stdin)
 # custom route in our web router. Here the path is hardcoded as
 # 'kickstart'.
 
+# Setup default values
+wiki_name = data.get("wiki_name","paperless-ngx")
+
+# Talk with agent using file descriptor.
+# Setup configuration from user input.
+agent.set_env("PAPERLESS_NGX_NAME", paperless_name)
+agent.set_env("PAPERLESS_SECRET_KEY", PAPERLESS_SECRET_KEY)
+agent.set_env("TRAEFIK_HOST", PAPERLESS_URL)
+agent.set_env("PAPERLESS_TIME_ZONE", PAPERLESS_TIME_ZONE)
+agent.set_env("PAPERLESS_OCR_LANGUAGE", PAPERLESS_OCR_LANGUAGE)
+
+# Setup PHP with safe defaults
+agent.set_env("PHP_ENABLE_OPCACHE", "1")
+agent.set_env("PHP_MEMORY_LIMIT", "512M")
 # Configure Traefik to route "/kickstart" path requests to the kickstart service
 response = agent.tasks.run(
     agent_id=agent.resolve_agent_id('traefik@node'),
@@ -26,7 +40,7 @@ response = agent.tasks.run(
         'url':  'http://127.0.0.1:' + os.environ["TCP_PORT"],
         'http2https': False,
         'lets_encrypt': False,
-        'path': '/kickstart',
+        'path': '/paperless',
     },
 )
 
