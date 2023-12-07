@@ -25,16 +25,16 @@ This Modules uses: [PAperless NGX](https://github.com/paperless-ngx/paperless-ng
 
 Instantiate the module with:
 
-    add-module ghcr.io/nethserver/kickstart:latest 1
+    add-module ghcr.io/nethserver/ns8-paperless-ngx:latest 1
 
 The output of the command will return the instance name.
 Output example:
 
-    {"module_id": "kickstart1", "image_name": "kickstart", "image_url": "ghcr.io/nethserver/kickstart:latest"}
+    {"module_id": "ns8-paperless-ngx1", "image_name": "ns8-paperless-ngx", "image_url": "ghcr.io/compgeniuses/ns8-paperless-ngx:latest"}
 
 ## Configure
 
-Let's assume that the kickstart instance is named `kickstart1`.
+Let's assume that the kickstart instance is named `ns8-paperless-ngx1`.
 
 Launch `configure-module`, by setting the following parameters:
 - `<MODULE_PARAM1_NAME>`: <MODULE_PARAM1_DESCRIPTION>
@@ -46,13 +46,13 @@ Example:
     api-cli run module/kickstart1/configure-module --data '{}'
 
 The above command will:
-- start and configure the kickstart instance
+- start and configure the ns8-paperless-ngx instance
 - (describe configuration process)
 - ...
 
-Send a test HTTP request to the kickstart backend service:
+Send a test HTTP request to the ns8-paperless-ngx backend service:
 
-    curl http://127.0.0.1/kickstart/
+    curl http://127.0.0.1/ns8-paperless-ngx/
 
 ## Smarthost setting discovery
 

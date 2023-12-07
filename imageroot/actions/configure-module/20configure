@@ -18,7 +18,7 @@ request = json.load(sys.stdin)
 # 'kickstart'.
 
 # Setup default values
-wiki_name = data.get("wiki_name","paperless-ngx")
+wiki_name = data.get("paperless_name","paperless-ngx")
 
 # Talk with agent using file descriptor.
 # Setup configuration from user input.
@@ -40,7 +40,7 @@ response = agent.tasks.run(
         'url':  'http://127.0.0.1:' + os.environ["TCP_PORT"],
         'http2https': False,
         'lets_encrypt': False,
-        'path': '/paperless',
+        'path': '/ns8-paperless-ngx',
     },
 )
 

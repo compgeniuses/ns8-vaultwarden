@@ -13,22 +13,22 @@ images=()
 # The image will be pushed to GitHub container registry
 repobase="${REPOBASE:-ghcr.io/nethserver}"
 # Configure the image name
-reponame="paperless"
+reponame="ns8-paperless-ngx"
 
 # Create a new empty container image
 container=$(buildah from scratch)
 
 # Reuse existing nodebuilder-kickstart container, to speed up builds
-if ! buildah containers --format "{{.ContainerName}}" | grep -q nodebuilder-paperless; then
+if ! buildah containers --format "{{.ContainerName}}" | grep -q nodebuilder-ns8-paperless-ngx; then
     echo "Pulling NodeJS runtime..."
-    buildah from --name nodebuilder-paperless -v "${PWD}:/usr/src:Z" docker.io/library/node:lts
+    buildah from --name nodebuilder-ns8-paperless-ngx -v "${PWD}:/usr/src:Z" docker.io/library/node:lts
 fi
 
 echo "Build static UI files with node..."
 buildah run \
     --workingdir=/usr/src/ui \
     --env="NODE_OPTIONS=--openssl-legacy-provider" \
-    nodebuilder-paperless \
+    nodebuilder-ns8-paperless-ngx \
     sh -c "yarn install && yarn build"
 
 # Add imageroot directory to the container image
@@ -39,7 +39,7 @@ buildah config --entrypoint=/ \
     --label="org.nethserver.authorizations=traefik@node:routeadm" \
     --label="org.nethserver.tcp-ports-demand=1" \
     --label="org.nethserver.rootfull=0" \
-    --label="org.nethserver.images=ghcr.io/paperless-ngx/paperless-ngx:latest" \
+    --label="org.nethserver.images=ghcr.io/compgeniuses/ns8-paperless-ngx:latest" \
     "${container}"
 # Commit the image
 buildah commit "${container}" "${repobase}/${reponame}"
