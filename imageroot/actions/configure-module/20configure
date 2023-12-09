@@ -18,7 +18,7 @@ request = json.load(sys.stdin)
 # 'kickstart'.
 
 # Setup default values
-wiki_name = data.get("paperless_name","paperless-ngx")
+paperless_name = data.get("paperless_name","paperless-ngx")
 
 # Talk with agent using file descriptor.
 # Setup configuration from user input.
