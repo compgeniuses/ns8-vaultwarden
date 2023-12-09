@@ -1,14 +1,14 @@
 # ns8-kickstart
 
-This is a template module for [NethServer 8](https://github.com/NethServer/ns8-core).
-This Modules uses: [PAperless NGX](https://github.com/paperless-ngx/paperless-ngx). 
+This is a ns8-paperless-ngx module for [NethServer 8](https://github.com/NethServer/ns8-core).
+This Modules uses: [PAperless NGX](https://github.com/paperless-ngx/ns8-paperless-ngx). 
 
 1. Rename some references inside the repo:
    ```
    modulename=$(basename $(pwd) | sed 's/^ns8-//')
-   git mv imageroot/systemd/user/kickstart.service imageroot/systemd/user/${modulename}.service
-   git mv tests/kickstart.robot tests/${modulename}.robot
-   sed -i "s/kickstart/${modulename}/g" $(find .github/ * -type f)
+   git mv imageroot/systemd/user/ns8-paperless-ngx.service imageroot/systemd/user/${modulename}.service
+   git mv tests/ns8-paperless-ngx.robot tests/${modulename}.robot
+   sed -i "s/ns8-paperless-ngx/${modulename}/g" $(find .github/ * -type f)
    git commit -a -m "Repository initialization"
    ```
 
@@ -25,7 +25,7 @@ This Modules uses: [PAperless NGX](https://github.com/paperless-ngx/paperless-ng
 
 Instantiate the module with:
 
-    add-module ghcr.io/nethserver/kickstart:latest 1
+    add-module ghcr.io/nethserver/ns8-paperless-ngx:latest 1
 
 The output of the command will return the instance name.
 Output example:
@@ -43,7 +43,7 @@ Launch `configure-module`, by setting the following parameters:
 
 Example:
 
-    api-cli run module/kickstart1/configure-module --data '{}'
+    api-cli run module/ns8-paperless-ngx1/configure-module --data '{}'
 
 The above command will:
 - start and configure the ns8-paperless-ngx instance
@@ -64,11 +64,11 @@ setup](https://nethserver.github.io/ns8-core/core/smarthost/) every time
 kickstart starts, the command `bin/discover-smarthost` runs and refreshes
 the `state/smarthost.env` file with fresh values from Redis.
 
-Furthermore if smarthost setup is changed when kickstart is already
+Furthermore if smarthost setup is changed when ns8-paperless-ngx is already
 running, the event handler `events/smarthost-changed/10reload_services`
 restarts the main module service.
 
-See also the `systemd/user/kickstart.service` file.
+See also the `systemd/user/ns8-paperless-ngx.service` file.
 
 This setting discovery is just an example to understand how the module is
 expected to work: it can be rewritten or discarded completely.
@@ -77,14 +77,14 @@ expected to work: it can be rewritten or discarded completely.
 
 To uninstall the instance:
 
-    remove-module --no-preserve kickstart1
+    remove-module --no-preserve ns8-paperless-ngx1
 
 ## Testing
 
 Test the module using the `test-module.sh` script:
 
 
-    ./test-module.sh <NODE_ADDR> ghcr.io/nethserver/kickstart:latest
+    ./test-module.sh <NODE_ADDR> ghcr.io/nethserver/ns8-paperless-ngx:latest
 
 The tests are made using [Robot Framework](https://robotframework.org/)
 
