@@ -7,11 +7,10 @@
 
 import json
 import sys
+# agent is a NethServer library which provides function to communicate with the agent
 import agent
-import agent.tasks
-import os
 
-request = json.load(sys.stdin)
+data = json.load(sys.stdin)
 
 # TODO: do something with the request payload. For example configure a
 # custom route in our web router. Here the path is hardcoded as
@@ -32,17 +31,8 @@ agent.set_env("PAPERLESS_OCR_LANGUAGE", PAPERLESS_OCR_LANGUAGE)
 agent.set_env("PHP_ENABLE_OPCACHE", "1")
 agent.set_env("PHP_MEMORY_LIMIT", "512M")
 # Configure Traefik to route "/kickstart" path requests to the kickstart service
-response = agent.tasks.run(
-    agent_id=agent.resolve_agent_id('traefik@node'),
-    action='set-route',
-    data={
-        'instance': os.environ['MODULE_ID'],
-        'url':  'http://127.0.0.1:' + os.environ["TCP_PORT"],
-        'http2https': False,
-        'lets_encrypt': False,
-        'path': '/ns8-paperless-ngx',
-    },
-)
 
-# Check if traefik configuration has been successfull
-agent.assert_exp(response['exit_code'] == 0)
+
+# Make sure everything is saved inside the environment file
+# just before starting systemd unit
+agent.dump_env()
