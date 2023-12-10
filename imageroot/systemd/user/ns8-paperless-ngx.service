@@ -23,7 +23,7 @@ ExecStart=/usr/bin/podman run \
     --cidfile=%t/ns8-paperless-ngx.ctr-id \
     --cgroups=no-conmon \
     --replace --name=%N \
-    --publish=127.0.0.1:${TCP_PORT}:8080 \
+    --publish=127.0.0.1:${TCP_PORT}:8000 \
     --env-file=smarthost.env \
     ${ECHO_SERVER_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/ns8-paperless-ngx.ctr-id -t 10
