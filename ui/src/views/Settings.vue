@@ -241,7 +241,7 @@ export default {
     },
     getConfigurationCompleted(taskContext, taskResult) {
       const config = taskResult.output;
-      this.wikiName = config.wiki_name;
+      this.paperlessName = config.paperless_name;
       this.username = config.username;
       this.password = config.password;
       this.userFullName = config.user_full_name;
@@ -250,7 +250,7 @@ export default {
       this.isLetsEncryptEnabled = config.lets_encrypt;
       this.isHttpToHttpsEnabled = config.http2https;
       this.loading.getConfiguration = false;
-      this.focusElement("wikiName");
+      this.focusElement("paperlessName");
     },
     validateConfigureModule() {
       this.clearErrors(this);
@@ -261,7 +261,7 @@ export default {
         this.error.wiki_name = "common.required";
 
         if (isValidationOk) {
-          this.focusElement("wikiName");
+          this.focusElement("paperlessName");
         }
         isValidationOk = false;
       }
@@ -371,7 +371,7 @@ export default {
         this.createModuleTaskForApp(this.instanceName, {
           action: taskAction,
           data: {
-            wiki_name: this.wikiName,
+            paperless_name: this.paperlessName,
             username: this.username,
             password: this.password,
             user_full_name: this.userFullName,
