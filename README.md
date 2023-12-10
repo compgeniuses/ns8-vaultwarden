@@ -1,4 +1,4 @@
-# ns8-kickstart
+# ns8-paperless ngx
 
 This is a ns8-paperless-ngx module for [NethServer 8](https://github.com/NethServer/ns8-core).
 This Modules uses: [PAperless NGX](https://github.com/paperless-ngx/paperless-ngx). 
