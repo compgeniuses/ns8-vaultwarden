@@ -30,5 +30,4 @@ echo "starting services"
 # Enable and restart the service
 systemctl --user enable ns8-paperless-ngx.service
 systemctl --user start ns8-paperless-ngx.service
-
 echo "services started"

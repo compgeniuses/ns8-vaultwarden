@@ -1,0 +1,15 @@
+#!/bin/bash
+
+#
+# Copyright (C) 2023 Nethesis S.r.l.
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+
+exec 1>&2
+
+# we need to create a log folder for the upgrade to 20230404
+if [[ "$PREV_DOKUWIKI_IMAGE" == "ghcr.io/paperless-ngx/paperless-ngx:latest" ]]; then
+    /usr/bin/podman run -d --rm --name ns8-paperless-ngx_upgrade -v ns8-paperless-ngx-data:/paperless/ns8-paperless-ngx:z ${NS8-PAPERLESS-NGX_IMAGE}
+    /usr/bin/podman exec -ti ns8-paperless-ngx_upgrade mkdir -vp /paperless/ns8-paperless-ngx/data/log
+    /usr/bin/podman stop ns8-paperless-ngx_upgrade
+fi
