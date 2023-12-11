@@ -4,7 +4,7 @@
 # Copyright (C) 2023 Nethesis S.r.l.
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
-
+import os
 import json
 import sys
 # agent is a NethServer library which provides function to communicate with the agent
@@ -18,6 +18,10 @@ data = json.load(sys.stdin)
 
 # Setup default values
 paperless_name = data.get("paperless_name","paperless-ngx")
+PAPERLESS_SECRET_KEY = data.get("PAPERLESS_SECRET_KEY","paperless-ngx")
+PAPERLESS_URL = data.get("PAPERLESS_URL","127.0.0.1:8000")
+PAPERLESS_TIME_ZONE = data.get("PAPERLESS_TIME_ZONE","America/Los_Angeles")
+PAPERLESS_OCR_LANGUAGE = data.get("PAPERLESS_OCR_LANGUAGE","eng")
 
 # Talk with agent using file descriptor.
 # Setup configuration from user input.
