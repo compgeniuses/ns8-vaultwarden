@@ -23,6 +23,12 @@ PAPERLESS_URL = data.get("PAPERLESS_URL","127.0.0.1:8000")
 PAPERLESS_TIME_ZONE = data.get("PAPERLESS_TIME_ZONE","America/Los_Angeles")
 PAPERLESS_OCR_LANGUAGE = data.get("PAPERLESS_OCR_LANGUAGE","eng")
 
+# Db Config
+
+POSTGRES_DB = data.get("POSTGRES_DB","paperless")
+POSTGRES_USER = data.get("POSTGRES_USER","paperless")
+POSTGRES_PASSWORD = data.get("POSTGRES_PASSWORD","p@perle$$")
+
 # Talk with agent using file descriptor.
 # Setup configuration from user input.
 agent.set_env("PAPERLESS_NGX_NAME", paperless_name)
@@ -30,6 +36,11 @@ agent.set_env("PAPERLESS_SECRET_KEY", PAPERLESS_SECRET_KEY)
 agent.set_env("TRAEFIK_HOST", PAPERLESS_URL)
 agent.set_env("PAPERLESS_TIME_ZONE", PAPERLESS_TIME_ZONE)
 agent.set_env("PAPERLESS_OCR_LANGUAGE", PAPERLESS_OCR_LANGUAGE)
+
+# DB Cnponfig
+agent.set_env("TRAEFIK_HOST",  POSTGRES_DB)
+agent.set_env("PAPERLESS_TIME_ZONE", POSTGRES_USER)
+agent.set_env("PAPERLESS_OCR_LANGUAGE", POSTGRES_PASSWORD)
 
 # Setup PHP with safe defaults
 agent.set_env("PHP_ENABLE_OPCACHE", "1")
