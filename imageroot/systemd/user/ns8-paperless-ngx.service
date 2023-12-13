@@ -9,7 +9,7 @@
 #
 [Unit]
 Description=ns8-paperless-ngx server
-
+Before=paperless-pgsql.service paperless-redis.service
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n
 EnvironmentFile=%S/state/environment

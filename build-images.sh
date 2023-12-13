@@ -69,4 +69,5 @@ else
     for image in "${images[@],,}"; do printf "  buildah push %s docker://%s:%s\n" "${image}" "${image}" "${IMAGETAG:-latest}" ; done
     printf "\n"
 fi
+
 #podman run --conmon-pidfile %t/paperless-redis.pid --cidfile %t/paperless-redis.ctr-id --cgroups=no-conmon --pod-id-file %t/ns8-paperless-ngx.pod-id --replace -d docker.io/library/redis:latest --name paperless-redis -v paperless-redis-data:/data  --appendonly yes
