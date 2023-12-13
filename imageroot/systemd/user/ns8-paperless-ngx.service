@@ -25,7 +25,7 @@ ExecStart=/usr/bin/podman run \
     --replace --name=%N \
     --publish=127.0.0.1:${TCP_PORT}:8000 \
     --env-file=smarthost.env \
-    ${paperless-ngx_IMAGE}
+    ${PAPERLESS-NGX_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/ns8-paperless-ngx.ctr-id -t 10
 ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/ns8-paperless-ngx.ctr-id
 PIDFile=%t/ns8-paperless-ngx.pid
