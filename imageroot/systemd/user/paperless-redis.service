@@ -1,6 +1,6 @@
 [Unit]
 Description=Podman paperless-redis.service
-Before=ns8-paperless-ngx.service
+After=ns8-paperless-ngx.service
 
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n
