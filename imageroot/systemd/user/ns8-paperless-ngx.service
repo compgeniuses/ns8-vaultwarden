@@ -20,6 +20,7 @@ ExecStartPre=-runagent discover-smarthost
 ExecStart=/usr/bin/podman run \
     --detach \
     --conmon-pidfile=%t/ns8-paperless-ngx.pid \
+    --pod-id-file=%t/ns8-paperless-ngx.pod-id\
     --cidfile=%t/ns8-paperless-ngx.ctr-id \
     --cgroups=no-conmon \
     --replace --name=%N \
