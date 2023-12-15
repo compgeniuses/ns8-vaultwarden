@@ -13,14 +13,17 @@ import agent
 config = {}
 
 # Read current configuration from Redis
-env = f'module/{os.environ["MODULE_ID"]}/environment'
-rdb = agent.redis_connect()
-config["paperless_name"] = rdb.hget(env, "PAPERLESS_NGX_NAME")
-config["PAPERLESS_SECRET_KEY"] = rdb.hget(env, "PAPERLESS_SECRET_KEY");
-config["PAPERLESS_URL"] =  rdb.hget(env, "TRAEFIK_HOST");
-config["http2https"] =  rdb.hget(env, "TRAEFIK_HTTP2HTTPS") == "True";
-config["lets_encrypt"] =  rdb.hget(env, "TRAEFIK_LETS_ENCRYPT") == "True";
-config["PAPERLESS_TIME_ZONE"] =  rdb.hget(env, "PAPERLESS_TIME_ZONE") == "America/Los_Angeles";
-config["PAPERLESS_OCR_LANGUAGE"] =  rdb.hget(env, "PAPERLESS_OCR_LANGUAGE") == "eng";
+config["host"] = os.getenv("TRAEFIK_HOST","")
+config["http2https"] = os.getenv("TRAEFIK_HTTP2HTTPS") == "True"
+config["lets_encrypt"] = os.getenv("TRAEFIK_LETS_ENCRYPT") == "True"
+config["paperless_name"] = os.getenv("PAPERLESS_NGX_NAME","")
+config["PAPERLESS_SECRET_KEY"] = os.getenv("PAPERLESS_SECRET_KEY","")
+config["PAPERLESS_URL"] = os.getenv("PAPERLESS_URL","")
+config["PAPERLESS_TIME_ZONE"] = os.getenv("PAPERLESS_TIME_ZONE","")
+config["PAPERLESS_OCR_LANGUAGE"] = os.getenv("PAPERLESS_OCR_LANGUAGE","")
+config["POSTGRES_DB"] = os.getenv("POSTGRES_DB","")
+config["POSTGRES_USER"] = os.getenv("POSTGRES_USER","")
+config["POSTGRES_PASSWORD"] = os.getenv("POSTGRES_PASSWORD","")
+
 
 json.dump(config, fp=sys.stdout)
