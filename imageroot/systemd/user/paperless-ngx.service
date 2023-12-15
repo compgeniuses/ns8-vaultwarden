@@ -1,0 +1,36 @@
+#
+# Copyright (C) 2023 Nethesis S.r.l.
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+
+#
+# This systemd unit starts a sogo instance using Podman.
+# Most parts of this file come from podman-generate-systemd.
+#
+
+[Unit]
+Description=Podman sogo.service
+Requires=paperless-pgsql.service paperless-redis.service ns8-paperless-ngx.service
+Before=paperless-pgsql.service paperless-redis.service ns8-paperless-ngx.service
+
+[Service]
+Environment=PODMAN_SYSTEMD_UNIT=%n
+EnvironmentFile=-%S/state/environment
+Restart=always
+TimeoutStopSec=70
+ExecStartPre=/bin/rm -f %t/ns8-paperless-ngx.pid %t/ns8-paperless-ngx.pod-id
+ExecStartPre=/usr/bin/podman pod create --infra-conmon-pidfile %t/ns8-paperless-ngx.pid \
+    --pod-id-file %t/ns8-paperless-ngx.pod-id \
+    --name ns8-paperless-ngx \
+    --publish 127.0.0.1:${TCP_PORT}:20001 \
+    --replace \
+    --network=slirp4netns:allow_host_loopback=true \
+    --add-host=accountprovider:10.0.2.2
+ExecStart=/usr/bin/podman pod start --pod-id-file %t/ns8-paperless-ngx.pod-id
+ExecStop=/usr/bin/podman pod stop --ignore --pod-id-file %t/ns8-paperless-ngx.pod-id -t 10
+ExecStopPost=/usr/bin/podman pod rm --ignore -f --pod-id-file %t/ns8-paperless-ngx.pod-id
+PIDFile=%t/ns8-paperless-ngx.pid
+Type=forking
+
+[Install]
+WantedBy=default.target

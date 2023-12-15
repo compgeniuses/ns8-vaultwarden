@@ -9,17 +9,18 @@
 #
 [Unit]
 Description=ns8-paperless-ngx server
-
+Before=paperless-pgsql.service paperless-redis.service
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n
 EnvironmentFile=%S/state/environment
 WorkingDirectory=%S/state
 Restart=always
 ExecStartPre=/bin/rm -f %t/ns8-paperless-ngx.pid %t/ns8-paperless-ngx.ctr-id
-ExecStartPre=-runagent discover-smarthost
+ExecStartPre=/usr/local/bin/runagent discover-smarthost
 ExecStart=/usr/bin/podman run \
     --detach \
     --conmon-pidfile=%t/ns8-paperless-ngx.pid \
+    --pod-id-file=%t/ns8-paperless-ngx.pod-id\
     --cidfile=%t/ns8-paperless-ngx.ctr-id \
     --cgroups=no-conmon \
     --replace --name=%N \
