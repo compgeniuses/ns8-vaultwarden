@@ -1,6 +1,6 @@
 [Unit]
 Description=Podman paperless-pgsql.service
-After=paperless-ngx.service
+After=ns8-paperless-ngx.service
 BindsTo=ns8-paperless-ngx.service
 
 [Service]
