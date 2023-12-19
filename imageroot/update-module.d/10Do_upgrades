@@ -8,8 +8,8 @@
 exec 1>&2
 
 # we need to create a log folder for the upgrade to 20230404
-if [[ "$PREV_DOKUWIKI_IMAGE" == "ghcr.io/paperless-ngx/paperless-ngx:latest" ]]; then
-    /usr/bin/podman run -d --rm --name ns8-paperless-ngx_upgrade -v ns8-paperless-ngx-data:/paperless/ns8-paperless-ngx:z ${NS8-PAPERLESS-NGX_IMAGE}
+if [[ "$PREV_PAPERLESS_NGX_IMAGE" == "ghcr.io/paperless-ngx/paperless-ngx:latest" ]]; then
+    /usr/bin/podman run -d --rm --name ns8-paperless-ngx_upgrade -v ns8-paperless-ngx-data:/paperless/ns8-paperless-ngx:z ${PAPERLESS-NGX_IMAGE}
     /usr/bin/podman exec -ti ns8-paperless-ngx_upgrade mkdir -vp /paperless/ns8-paperless-ngx/data/log
     /usr/bin/podman stop ns8-paperless-ngx_upgrade
 fi
