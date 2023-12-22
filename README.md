@@ -34,11 +34,14 @@ Output example:
 
 ## Configure
 
-Let's assume that the kickstart instance is named `ns8-paperless-ngx1`.
+Let's assume that the paperless instance is named `ns8-paperless-ngx1`.
 
 Launch `configure-module`, by setting the following parameters:
-- `<MODULE_PARAM1_NAME>`: <MODULE_PARAM1_DESCRIPTION>
-- `<MODULE_PARAM2_NAME>`: <MODULE_PARAM2_DESCRIPTION>
+- `paperless_name`: the name given to the instance that wil also appear as the name on the dachboard
+- `PAPERLESS_SECRET_KEY`: a generated secret key that will be used as the project security key
+- `PAPERLESS_URL`: the traefik host url for the project
+- `PAPERLESS_TIME_ZONE`: the timezone for the project, a config that can be modified
+- `PAPERLESS_OCR_LANGUAGE`: the default OCR language for when files are scanned
 - ...
 
 Example:
