@@ -49,7 +49,7 @@ response = agent.tasks.run(
     data={
         'instance': os.environ['MODULE_ID'],
         'url': f'http://127.0.0.1:{ports[0]}',
-        'host': os.environ['host'],
+        'host': os.environ['TRAEFIK_HOST'],
         'lets_encrypt': le,
         'http2https': h2hs
     },
@@ -62,7 +62,7 @@ response = agent.tasks.run(
     data={
         'instance': os.environ['MODULE_ID'],
         'url': f'http://127.0.0.1:{ports[1]}',
-        'host_gotenberg': os.environ['host_gotenberg'],
+        'host_gotenberg': os.environ['PAPERLESS_TIKA_GOTENBERG_ENDPOINT'],
         'lets_encrypt': le,
         'http2https': h2hs
     },
@@ -73,8 +73,8 @@ response = agent.tasks.run(
     action='set-route',
     data={
         'instance': os.environ['MODULE_ID'],
-        'url': f'http://127.0.0.1:{ports[1]}',
-        'host_tika': os.environ['host_tika'],
+        'url': f'http://127.0.0.1:{ports[2]}',
+        'host_tika': os.environ['PAPERLESS_TIKA_ENDPOINT'],
         'lets_encrypt': le,
         'http2https': h2hs
     },
