@@ -21,7 +21,7 @@ ExecStartPre=/usr/local/bin/runagent discover-smarthost
 ExecStart=/usr/bin/podman run \
     --detach \
     --conmon-pidfile=%t/paperless-gotenberg.pid \
-    --pod-id-file=%t/ns8-paperless-ngx.pod-id\
+    --pod-id-file=%t/ns8-paperless-ngx.pod-id \
     --cidfile=%t/paperless-gotenberg.ctr-id \
     --cgroups=no-conmon \
     --replace --name=%N \
