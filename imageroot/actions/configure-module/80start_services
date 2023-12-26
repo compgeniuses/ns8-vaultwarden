@@ -9,5 +9,5 @@
 
 touch smarthost.env
 
-systemctl --user enable ns8-paperless-ngx.service
-systemctl --user restart ns8-paperless-ngx.service
+systemctl --user enable paperlessngx-pod.service
+systemctl --user restart paperlessngx-pod.service

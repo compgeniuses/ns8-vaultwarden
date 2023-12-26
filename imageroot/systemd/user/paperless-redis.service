@@ -1,7 +1,7 @@
 [Unit]
 Description=Podman paperless-redis.service
+BindsTo=paperlessngx-pod.service
 After=paperless-pgsql.service
-BindsTo=ns8-paperless-ngx.service
 
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n REDIS_IMAGE=docker.io/library/redis:7
@@ -9,7 +9,13 @@ EnvironmentFile=%S/state/environment
 Restart=always
 TimeoutStopSec=70
 ExecStartPre=/bin/rm -f %t/paperless-redis.pid %t/paperless-redis.ctr-id
-ExecStart=/usr/bin/podman run --conmon-pidfile %t/paperless-redis.pid --cidfile %t/paperless-redis.ctr-id --cgroups=no-conmon --pod-id-file %t/ns8-paperless-ngx.pod-id --replace -d --name paperless-redis -v paperless-redis-data:/data ${REDIS_IMAGE} --appendonly yes
+ExecStart=/usr/bin/podman run --conmon-pidfile %t/paperless-redis.pid \
+    --cidfile %t/paperless-redis.ctr-id \
+    --cgroups=no-conmon \
+    --pod-id-file %t/ns8-paperless-ngx.pod-id --replace -d \
+    --name paperless-redis \
+    -v paperless-redis-data:/data \
+    ${REDIS_IMAGE} --appendonly yes
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/paperless-redis.ctr-id -t 10
 ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/paperless-redis.ctr-id
 PIDFile=%t/paperless-redis.pid

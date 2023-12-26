@@ -19,7 +19,6 @@ data = json.load(sys.stdin)
 # Setup default values
 paperless_name = data.get("paperless_name","paperless-ngx")
 PAPERLESS_SECRET_KEY = data.get("PAPERLESS_SECRET_KEY","hdswihrdvysjbjiiubajbcjhidfnskjbcjhvikjsbjhk")
-PAPERLESS_URL = data.get("PAPERLESS_URL","127.0.0.1:8000")
 PAPERLESS_TIME_ZONE = data.get("PAPERLESS_TIME_ZONE","America/Los_Angeles")
 PAPERLESS_OCR_LANGUAGE = data.get("PAPERLESS_OCR_LANGUAGE","eng")
 
@@ -43,7 +42,6 @@ agent.write_envfile('database.env', db_config)
 # Setup configuration from user input.
 agent.set_env("PAPERLESS_NGX_NAME", paperless_name)
 agent.set_env("PAPERLESS_SECRET_KEY", PAPERLESS_SECRET_KEY)
-agent.set_env("TRAEFIK_HOST", PAPERLESS_URL)
 agent.set_env("PAPERLESS_TIME_ZONE", PAPERLESS_TIME_ZONE)
 agent.set_env("PAPERLESS_OCR_LANGUAGE", PAPERLESS_OCR_LANGUAGE)
 

@@ -13,22 +13,22 @@ images=()
 # The image will be pushed to GitHub container registry
 repobase="${REPOBASE:-ghcr.io/compgeniuses}"
 # Configure the image name
-reponame="ns8-paperless-ngx"
+reponame="paperlessngx"
 
 # Create a new empty container image
 container=$(buildah from scratch)
 
 # Reuse existing nodebuilder-kickstart container, to speed up builds
-if ! buildah containers --format "{{.ContainerName}}" | grep -q nodebuilder-ns8-paperless-ngx; then
+if ! buildah containers --format "{{.ContainerName}}" | grep -q nodebuilder-ns8-paperlessngx; then
     echo "Pulling NodeJS runtime..."
-    buildah from --name nodebuilder-ns8-paperless-ngx -v "${PWD}:/usr/src:Z" docker.io/library/node:lts
+    buildah from --name nodebuilder-ns8-paperlessngx -v "${PWD}:/usr/src:Z" docker.io/library/node:lts
 fi
 
 echo "Build static UI files with node..."
 buildah run \
     --workingdir=/usr/src/ui \
     --env="NODE_OPTIONS=--openssl-legacy-provider" \
-    nodebuilder-ns8-paperless-ngx \
+    nodebuilder-ns8-paperlessngx \
     sh -c "yarn install && yarn build"
 
 # Add imageroot directory to the container image
@@ -39,7 +39,7 @@ buildah config --entrypoint=/ \
     --label="org.nethserver.authorizations=traefik@node:routeadm" \
     --label="org.nethserver.tcp-ports-demand=1" \
     --label="org.nethserver.rootfull=0" \
-    --label="org.nethserver.images=docker.io/library/redis:7 docker.io/library/postgres:15 ghcr.io/paperless-ngx/paperless-ngx:latest" \
+    --label="org.nethserver.images=docker.io/library/redis:7 docker.io/library/postgres:15 docker.io/paperlessngx/paperless-ngx:2.1.3" \
     "${container}"
 # Commit the image
 buildah commit "${container}" "${repobase}/${reponame}"
@@ -69,5 +69,3 @@ else
     for image in "${images[@],,}"; do printf "  buildah push %s docker://%s:%s\n" "${image}" "${image}" "${IMAGETAG:-latest}" ; done
     printf "\n"
 fi
-
-#podman run --conmon-pidfile %t/paperless-redis.pid --cidfile %t/paperless-redis.ctr-id --cgroups=no-conmon --pod-id-file %t/ns8-paperless-ngx.pod-id --replace -d docker.io/library/redis:latest --name paperless-redis -v paperless-redis-data:/data  --appendonly yes

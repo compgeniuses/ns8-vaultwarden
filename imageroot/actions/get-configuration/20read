@@ -18,7 +18,6 @@ config["http2https"] = os.getenv("TRAEFIK_HTTP2HTTPS") == "True"
 config["lets_encrypt"] = os.getenv("TRAEFIK_LETS_ENCRYPT") == "True"
 config["paperless_name"] = os.getenv("PAPERLESS_NGX_NAME","")
 config["PAPERLESS_SECRET_KEY"] = os.getenv("PAPERLESS_SECRET_KEY","")
-config["TRAEFIK_HOST"] = os.getenv("PAPERLESS_URL","")
 config["PAPERLESS_TIME_ZONE"] = os.getenv("PAPERLESS_TIME_ZONE","")
 config["PAPERLESS_OCR_LANGUAGE"] = os.getenv("PAPERLESS_OCR_LANGUAGE","")
 config["POSTGRES_DB"] = os.getenv("POSTGRES_DB","")
