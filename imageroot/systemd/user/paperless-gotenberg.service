@@ -8,9 +8,9 @@
 # Most parts of this file come from podman-generate-systemd.
 #
 [Unit]
-Description=paperless-gotenberg server
+Description=Podman paperless-gotenberg server
 BindsTo=paperlessngx-pod.service
-After=paperless-redis.service paperless-pgsql.service
+After=paperless-redis.service paperless-pgsql.service paperless-tika.service
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n
 EnvironmentFile=%S/state/environment
@@ -21,7 +21,7 @@ ExecStartPre=/usr/local/bin/runagent discover-smarthost
 ExecStart=/usr/bin/podman run \
     --detach \
     --conmon-pidfile=%t/paperless-gotenberg.pid \
-    --pod-id-file=%t/paperless-gotenberg.pod-id\
+    --pod-id-file=%t/ns8-paperless-ngx.pod-id\
     --cidfile=%t/paperless-gotenberg.ctr-id \
     --cgroups=no-conmon \
     --replace --name=%N \
