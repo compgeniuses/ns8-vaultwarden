@@ -23,6 +23,8 @@ config["PAPERLESS_OCR_LANGUAGE"] = os.getenv("PAPERLESS_OCR_LANGUAGE","")
 config["POSTGRES_DB"] = os.getenv("POSTGRES_DB","")
 config["POSTGRES_USER"] = os.getenv("POSTGRES_USER","")
 config["POSTGRES_PASSWORD"] = os.getenv("POSTGRES_PASSWORD","")
-
+config["PAPERLESS_TIKA_ENABLED"] = os.getenv("PAPERLESS_TIKA_ENABLED") == 1
+config["PAPERLESS_TIKA_GOTENBERG_ENDPOINT"] = os.getenv("PAPERLESS_TIKA_GOTENBERG_ENDPOINT","")
+config["PAPERLESS_TIKA_ENDPOINT"] = os.getenv("PAPERLESS_TIKA_ENDPOINT","")
 
 json.dump(config, fp=sys.stdout)

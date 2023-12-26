@@ -48,6 +48,10 @@ Example:
 
     api-cli run module/paperlessngx1/configure-module --data '{"host": "paperlessngx.domain.com"}'
 
+    or if modifying another value: 
+    
+    api-cli run module/paperlessngx5/configure-module --data '{"host": "paperlessngx.domain.com","paperless_name": "MyPaperless NGX"}'
+
 The above command will:
 - start and configure the ns8-paperless-ngx instance
 - (describe configuration process)

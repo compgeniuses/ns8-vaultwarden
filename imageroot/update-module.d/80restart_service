@@ -7,4 +7,4 @@
 
 exec 1>&2
 
-systemctl --user try-restart ns8-paperless-ngx.service
+systemctl --user try-restart paperlessngx.service

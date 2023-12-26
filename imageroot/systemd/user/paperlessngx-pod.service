@@ -4,7 +4,7 @@
 #
 
 #
-# This systemd unit starts a roundcubemail instance using Podman.
+# This systemd unit starts a paperless gotenberg instance using Podman.
 # Most parts of this file come from podman-generate-systemd.
 #
 

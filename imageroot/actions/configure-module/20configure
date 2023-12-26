@@ -22,6 +22,12 @@ PAPERLESS_SECRET_KEY = data.get("PAPERLESS_SECRET_KEY","hdswihrdvysjbjiiubajbcjh
 PAPERLESS_TIME_ZONE = data.get("PAPERLESS_TIME_ZONE","America/Los_Angeles")
 PAPERLESS_OCR_LANGUAGE = data.get("PAPERLESS_OCR_LANGUAGE","eng")
 
+
+# tika and Gotenberg settings
+PAPERLESS_TIKA_ENABLED = data.get("PAPERLESS_TIKA_ENABLED","1")
+PAPERLESS_TIKA_GOTENBERG_ENDPOINT = data.get("PAPERLESS_TIKA_GOTENBERG_ENDPOINT","http://127.0.0.1:3000")
+PAPERLESS_TIKA_ENDPOINT = data.get("PAPERLESS_TIKA_ENDPOINT","http://127.0.0.1:9998")
+
 # Db Config
 
 POSTGRES_DB = data.get("POSTGRES_DB","paperless")
@@ -39,13 +45,17 @@ db_config = {
 agent.write_envfile('database.env', db_config)
 
 # Talk with agent using file descriptor.
+
 # Setup configuration from user input.
 agent.set_env("PAPERLESS_NGX_NAME", paperless_name)
 agent.set_env("PAPERLESS_SECRET_KEY", PAPERLESS_SECRET_KEY)
 agent.set_env("PAPERLESS_TIME_ZONE", PAPERLESS_TIME_ZONE)
 agent.set_env("PAPERLESS_OCR_LANGUAGE", PAPERLESS_OCR_LANGUAGE)
 
-
+# Setup tika and gotenberg configuration from user input.
+agent.set_env("PAPERLESS_TIKA_ENABLED", PAPERLESS_TIKA_ENABLED)
+agent.set_env("PAPERLESS_TIKA_GOTENBERG_ENDPOINT", PAPERLESS_TIKA_GOTENBERG_ENDPOINT)
+agent.set_env("PAPERLESS_TIKA_ENDPOINT", PAPERLESS_TIKA_ENDPOINT)
 
 # Setup PHP with safe defaults
 agent.set_env("PHP_ENABLE_OPCACHE", "1")
