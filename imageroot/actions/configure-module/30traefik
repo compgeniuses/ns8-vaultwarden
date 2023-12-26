@@ -13,8 +13,8 @@ data = json.load(sys.stdin)
 
 # Setup default values
 host = data.get("host", "")
-host = data.get("host_gotenberg", "")
-host = data.get("host_tika", "")
+host_gotenberg = data.get("host_gotenberg", "")
+host_tika = data.get("host_tika", "")
 h2hs = data.get("http2https", True)
 le = data.get("lets_encrypt", False)
 
@@ -23,8 +23,8 @@ le = data.get("lets_encrypt", False)
 agent.set_env("TRAEFIK_HOST", host)
 agent.set_env("TRAEFIK_HTTP2HTTPS", h2hs)
 agent.set_env("TRAEFIK_LETS_ENCRYPT", le)
-agent.set_env("PAPERLESS_TIKA_GOTENBERG_ENDPOINT", host)
-agent.set_env("PAPERLESS_TIKA_ENDPOINT", host)
+agent.set_env("PAPERLESS_TIKA_GOTENBERG_ENDPOINT", host_tika)
+agent.set_env("PAPERLESS_TIKA_ENDPOINT", host_tika)
 
 
 # Multiple ports Definition
@@ -62,7 +62,7 @@ response = agent.tasks.run(
     data={
         'instance': os.environ['MODULE_ID']+'-gotenberg',
         'url': f'http://127.0.0.1:{ports[1]}',
-        'host': os.environ['PAPERLESS_TIKA_GOTENBERG_ENDPOINT'],
+        'host_gotenberg': os.environ['PAPERLESS_TIKA_GOTENBERG_ENDPOINT'],
         'lets_encrypt': le,
         'http2https': h2hs
     },
@@ -74,7 +74,7 @@ response = agent.tasks.run(
     data={
         'instance': os.environ['MODULE_ID']+'-tika',
         'url': f'http://127.0.0.1:{ports[2]}',
-        'host': os.environ['PAPERLESS_TIKA_ENDPOINT'],
+        'host_tika': os.environ['PAPERLESS_TIKA_ENDPOINT'],
         'lets_encrypt': le,
         'http2https': h2hs
     },
