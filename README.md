@@ -37,11 +37,19 @@ Output example:
 Let's assume that the paperless instance is named `paperlessngx1`.
 
 Launch `configure-module`, by setting the following parameters:
+
 - `paperless_name`: the name given to the instance that wil also appear as the name on the dachboard
 - `PAPERLESS_SECRET_KEY`: a generated secret key that will be used as the project security key
   `host`: the traefik host url for the project
 - `PAPERLESS_TIME_ZONE`: the timezone for the project, a config that can be modified
-- `PAPERLESS_OCR_LANGUAGE`: the default OCR language for when files are scanned
+- `http2https`: TRUE or FALSE
+- `PAPERLESS_TIME_ZONE`: the default is America/Los_Angeles
+- `PAPERLESS_TIKA_ENABLED`: Set 1 for true, or 0 for false
+- `PAPERLESS_TIKA_GOTENBERG_ENDPOINT`: end point for gotenberg url
+- `PAPERLESS_TIKA_ENDPOINT`: the endpoint for tika url
+- `PAPERLESS_ADMIN_USER`: define the default username and password for superadmin: set to = paperlessadmin
+- `POSTGRES_PASSWORD`: Define the Default password Set to = P@perle5$
+- `PAPERLESS_ADMIN_MAIL`: Define default email for superadmin
 - ...
 
 Example:
@@ -49,13 +57,17 @@ Example:
     api-cli run module/paperlessngx1/configure-module --data '{"host": "paperlessngx.domain.com"}'
 
     or if modifying another value: 
-    
+
     api-cli run module/paperlessngx5/configure-module --data '{"host": "paperlessngx.domain.com","paperless_name": "MyPaperless NGX"}'
 
 The above command will:
-- start and configure the ns8-paperless-ngx instance
+- start and configure the paperlessngx instance
 - (describe configuration process)
 - ...
+
+Additional Parameters are Described here:
+https://docs.paperless-ngx.com/configuration/#hosting-security
+WHile they have not been Implemented, if you require more parameters to be defined, kindly free to raise an issue, and define why and how that parameter should be implemented for use
 
 Send a test HTTP request to the ns8-paperless-ngx backend service:
 
