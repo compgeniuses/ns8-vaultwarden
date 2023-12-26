@@ -39,7 +39,7 @@ buildah config --entrypoint=/ \
     --label="org.nethserver.authorizations=traefik@node:routeadm" \
     --label="org.nethserver.tcp-ports-demand=1" \
     --label="org.nethserver.rootfull=0" \
-    --label="org.nethserver.images=docker.io/library/redis:7 docker.io/library/postgres:15 docker.io/paperlessngx/paperless-ngx:2.1.3" \
+    --label="org.nethserver.images=docker.io/library/redis:7 docker.io/library/postgres:15 docker.io/paperlessngx/paperless-ngx:2.1.3 ghcr.io/paperless-ngx/tika:latest docker.io/gotenberg/gotenberg:7.10" \
     "${container}"
 # Commit the image
 buildah commit "${container}" "${repobase}/${reponame}"
