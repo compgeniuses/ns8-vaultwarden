@@ -80,7 +80,7 @@ expected to work: it can be rewritten or discarded completely.
 
 To uninstall the instance:
 
-    remove-module --no-preserve ns8-paperless-ngx1
+    remove-module --no-preserve paperlessngx1
 
 ## Testing
 
@@ -99,3 +99,10 @@ To setup the translation process:
 
 - add [GitHub Weblate app](https://docs.weblate.org/en/latest/admin/continuous.html#github-setup) to your repository
 - add your repository to [hosted.weblate.org]((https://hosted.weblate.org) or ask a NethServer developer to add it to ns8 Weblate project
+
+## To Do
+[Optional Services:](https://docs.paperless-ngx.com/configuration/#optional-services)
+- Understand and Implement [Apache Tika](https://tika.apache.org/) to your repository
+- Understand and Implement Docker  [gotenberg](https://gotenberg.dev/) to your repository
+
+Paperless can make use of Tika and Gotenberg for parsing and converting "Office" documents (such as ".doc", ".xlsx" and ".odt"). Tika and Gotenberg are also needed to allow parsing of E-Mails (.eml).
