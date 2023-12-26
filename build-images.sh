@@ -39,7 +39,7 @@ buildah config --entrypoint=/ \
     --label="org.nethserver.authorizations=traefik@node:routeadm" \
     --label="org.nethserver.tcp-ports-demand=1" \
     --label="org.nethserver.rootfull=0" \
-    --label="org.nethserver.images=docker.io/library/redis:7 docker.io/library/postgres:15 ghcr.io/paperless-ngx/paperless-ngx:2.1.3" \
+    --label="org.nethserver.images=docker.io/library/redis:7 docker.io/library/postgres:15 docker.io/paperlessngx/paperless-ngx:latest" \
     "${container}"
 # Commit the image
 buildah commit "${container}" "${repobase}/${reponame}"
@@ -69,5 +69,3 @@ else
     for image in "${images[@],,}"; do printf "  buildah push %s docker://%s:%s\n" "${image}" "${image}" "${IMAGETAG:-latest}" ; done
     printf "\n"
 fi
-
-#podman run --conmon-pidfile %t/paperless-redis.pid --cidfile %t/paperless-redis.ctr-id --cgroups=no-conmon --pod-id-file %t/ns8-paperless-ngx.pod-id --replace -d docker.io/library/redis:latest --name paperless-redis -v paperless-redis-data:/data  --appendonly yes
