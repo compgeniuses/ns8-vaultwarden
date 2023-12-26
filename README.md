@@ -39,14 +39,14 @@ Let's assume that the paperless instance is named `ns8-paperless-ngx1`.
 Launch `configure-module`, by setting the following parameters:
 - `paperless_name`: the name given to the instance that wil also appear as the name on the dachboard
 - `PAPERLESS_SECRET_KEY`: a generated secret key that will be used as the project security key
-- `PAPERLESS_URL`: the traefik host url for the project
+  `host`: the traefik host url for the project
 - `PAPERLESS_TIME_ZONE`: the timezone for the project, a config that can be modified
 - `PAPERLESS_OCR_LANGUAGE`: the default OCR language for when files are scanned
 - ...
 
 Example:
 
-    api-cli run module/ns8-paperless-ngx1/configure-module --data '{}'
+    api-cli run module/paperlessngx1/configure-module --data '{"host": "paperlessngx.domain.com"}'
 
 The above command will:
 - start and configure the ns8-paperless-ngx instance
