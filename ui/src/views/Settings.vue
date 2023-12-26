@@ -242,10 +242,10 @@ export default {
     getConfigurationCompleted(taskContext, taskResult) {
       const config = taskResult.output;
       this.paperlessName = config.paperless_name;
-      this.username = config.username;
-      this.password = config.password;
+      this.username = config.PAPERLESS_ADMIN_USER;
+      this.password = config.PAPERLESS_ADMIN_PASSWORD;
       this.userFullName = config.user_full_name;
-      this.email = config.email;
+      this.email = config.PAPERLESS_ADMIN_MAIL;
       this.host = config.host;
       this.isLetsEncryptEnabled = config.lets_encrypt;
       this.isHttpToHttpsEnabled = config.http2https;
