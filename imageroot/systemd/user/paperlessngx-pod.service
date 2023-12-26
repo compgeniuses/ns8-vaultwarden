@@ -10,8 +10,8 @@
 
 [Unit]
 Description=Podman paperlessngx-pod.service
-Requires=paperless-redis.service paperless-pgsql.service ns8-paperless-ngx.service
-Before=paperless-redis.service paperless-pgsql.service ns8-paperless-ngx.service
+Requires=paperless-redis.service paperless-pgsql.service ns8-paperless-ngx.service paperless-gotenberg.service
+Before=paperless-redis.service paperless-pgsql.service ns8-paperless-ngx.service paperless-gotenberg.service
 
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n
