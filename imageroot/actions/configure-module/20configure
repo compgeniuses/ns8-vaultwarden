@@ -9,7 +9,6 @@ import json
 import sys
 # agent is a NethServer library which provides function to communicate with the agent
 import agent
-
 data = json.load(sys.stdin)
 
 # TODO: do something with the request payload. For example configure a
@@ -28,8 +27,8 @@ PAPERLESS_COOKIE_PREFIX = data.get("PAPERLESS_COOKIE_PREFIX","paperlessngx")
 
 # tika and Gotenberg settings
 PAPERLESS_TIKA_ENABLED = data.get("PAPERLESS_TIKA_ENABLED","1")
-PAPERLESS_TIKA_GOTENBERG_ENDPOINT = data.get("PAPERLESS_TIKA_GOTENBERG_ENDPOINT","http://127.0.0.1:3000")
-PAPERLESS_TIKA_ENDPOINT = data.get("PAPERLESS_TIKA_ENDPOINT","http://127.0.0.1:9998")
+PAPERLESS_TIKA_GOTENBERG_ENDPOINT = data.get("PAPERLESS_TIKA_GOTENBERG_ENDPOINT","")
+PAPERLESS_TIKA_ENDPOINT = data.get("PAPERLESS_TIKA_ENDPOINT","")
 
 # Db Config
 
