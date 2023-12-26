@@ -54,6 +54,8 @@ response = agent.tasks.run(
         'http2https': h2hs
     },
 )
+if 'TRAEFIK_HOST' not in os.environ:
+    raise Exception("Environment variable TRAEFIK_HOST is not set. Please set it before running the program.")
 
 # Configure gotenberg virtual host
 response = agent.tasks.run(
