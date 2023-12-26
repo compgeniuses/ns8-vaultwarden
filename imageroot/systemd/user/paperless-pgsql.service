@@ -1,7 +1,7 @@
 [Unit]
 Description=Podman paperless-pgsql.service
-After=ns8-paperless-ngx.service
-BindsTo=ns8-paperless-ngx.service
+BindsTo=paperlessngx-pod.service
+Before=paperless-redis.service
 
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n

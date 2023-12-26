@@ -1,7 +1,7 @@
 [Unit]
 Description=Podman paperless-redis.service
+BindsTo=paperlessngx-pod.service
 After=paperless-pgsql.service
-BindsTo=ns8-paperless-ngx.service
 
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n REDIS_IMAGE=docker.io/library/redis:7
