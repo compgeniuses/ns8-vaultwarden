@@ -13,7 +13,7 @@ import agent
 config = {}
 
 # Read current configuration from Redis
-config["host"] = os.getenv("TRAEFIK_HOST","")
+config["PAPERLESS_URL"] = os.getenv("PAPERLESS_URL","")
 config["http2https"] = os.getenv("TRAEFIK_HTTP2HTTPS") == "True"
 config["lets_encrypt"] = os.getenv("TRAEFIK_LETS_ENCRYPT") == "True"
 config["paperless_name"] = os.getenv("PAPERLESS_NGX_NAME","")
