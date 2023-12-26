@@ -25,16 +25,16 @@ This Modules uses: [PAperless NGX](https://github.com/paperless-ngx/paperless-ng
 
 Instantiate the module with:
 
-    add-module ghcr.io/compgeniuses/ns8-paperless-ngx:latest 1
+    add-module ghcr.io/compgeniuses/paperlessngx:latest 1
 
 The output of the command will return the instance name.
 Output example:
 
-    {"module_id": "ns8-paperless-ngx1", "image_name": "ns8-paperless-ngx", "image_url": "ghcr.io/compgeniuses/ns8-paperless-ngx:latest"}
+    {"module_id": "paperlessngx", "image_name": "paperlessngx", "image_url": "ghcr.io/compgeniuses/paperlessngx:latest"}
 
 ## Configure
 
-Let's assume that the paperless instance is named `ns8-paperless-ngx1`.
+Let's assume that the paperless instance is named `paperlessngx1`.
 
 Launch `configure-module`, by setting the following parameters:
 - `paperless_name`: the name given to the instance that wil also appear as the name on the dachboard
@@ -55,7 +55,7 @@ The above command will:
 
 Send a test HTTP request to the ns8-paperless-ngx backend service:
 
-    curl http://127.0.0.1/ns8-paperless-ngx/
+    curl http://127.0.0.1/paperlessngx/
 
 ## Smarthost setting discovery
 
