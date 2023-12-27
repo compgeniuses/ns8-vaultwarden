@@ -13,8 +13,8 @@ data = json.load(sys.stdin)
 
 # Setup default values
 host = data.get("host", "")
-host_gotenberg = data.get("host_gotenberg", "")
-host_tika = data.get("host_tika", "")
+gotenberg = data.get("gotenberg", "")
+tika = data.get("tika", "")
 h2hs = data.get("http2https", True)
 le = data.get("lets_encrypt", False)
 
@@ -23,15 +23,11 @@ le = data.get("lets_encrypt", False)
 agent.set_env("TRAEFIK_HOST", host)
 agent.set_env("TRAEFIK_HTTP2HTTPS", h2hs)
 agent.set_env("TRAEFIK_LETS_ENCRYPT", le)
-agent.set_env("PAPERLESS_TIKA_GOTENBERG_ENDPOINT", host_tika)
-agent.set_env("PAPERLESS_TIKA_ENDPOINT", host_tika)
+agent.set_env("PAPERLESS_TIKA_GOTENBERG_ENDPOINT", gotenberg)
+agent.set_env("PAPERLESS_TIKA_ENDPOINT", tika)
 
 
 # Multiple ports Definition
-ports = os.environ['TCP_PORTS'].split(',')
-agent.set_env('PAPERLESS_TCP_PORT', ports[0])
-agent.set_env('TIKA_TCP_PORT', ports[1])
-agent.set_env('GOTENBERG_TCP_PORT', ports[2])
 
 # Make sure everything is saved inside the environment file
 # just before starting systemd unit
@@ -48,33 +44,8 @@ response = agent.tasks.run(
     action='set-route',
     data={
         'instance': os.environ['MODULE_ID'],
-        'url': f'http://127.0.0.1:{ports[0]}',
-        'host': os.environ['TRAEFIK_HOST'],
-        'lets_encrypt': le,
-        'http2https': h2hs
-    },
-)
-
-# Configure gotenberg virtual host
-response = agent.tasks.run(
-    agent_id=default_traefik_id,
-    action='set-route',
-    data={
-        'instance': os.environ['MODULE_ID']+'-gotenberg',
-        'url': f'http://127.0.0.1:{ports[1]}',
-        'host_gotenberg': os.environ['PAPERLESS_TIKA_GOTENBERG_ENDPOINT'],
-        'lets_encrypt': le,
-        'http2https': h2hs
-    },
-)
-# Configure tika virtual host
-response = agent.tasks.run(
-    agent_id=default_traefik_id,
-    action='set-route',
-    data={
-        'instance': os.environ['MODULE_ID']+'-tika',
-        'url': f'http://127.0.0.1:{ports[2]}',
-        'host_tika': os.environ['PAPERLESS_TIKA_ENDPOINT'],
+        'url': f'http://127.0.0.1:{os.environ["TCP_PORT"]}',
+        'host': host,
         'lets_encrypt': le,
         'http2https': h2hs
     },

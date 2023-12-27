@@ -45,11 +45,15 @@ Launch `configure-module`, by setting the following parameters:
 - `http2https`: TRUE or FALSE
 - `PAPERLESS_TIME_ZONE`: the default is America/Los_Angeles
 - `PAPERLESS_TIKA_ENABLED`: Set 1 for true, or 0 for false
-- `PAPERLESS_TIKA_GOTENBERG_ENDPOINT`: end point for gotenberg url
-- `PAPERLESS_TIKA_ENDPOINT`: the endpoint for tika url
+- `gotenberg`: end point for gotenberg url PAPERLESS_TIKA_GOTENBERG_ENDPOINT
+- `tika`: the endpoint for tika url PAPERLESS_TIKA_ENDPOINT
 - `PAPERLESS_ADMIN_USER`: define the default username and password for superadmin: set to = paperlessadmin
-- `POSTGRES_PASSWORD`: Define the Default password Set to = P@perle5$
-- `PAPERLESS_ADMIN_MAIL`: Define default email for superadmin
+- `PAPERLESS_ADMIN_PASSWORD`: Define the Default password Set to = P@perle5$
+- `POSTGRES_DB`: the PGSQL db to be used
+- `POSTGRES_USER`: the pgsql username
+- `POSTGRES_PASSWORD`: the pgsql password
+- `lets_encrypt`: Set LEtsecnrypt to True or False, Default is FALSE
+- `http2https`: set redirect to True or False, Default is True
 - ...
 
 Example:

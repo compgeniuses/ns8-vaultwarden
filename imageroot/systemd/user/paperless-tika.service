@@ -10,7 +10,7 @@
 [Unit]
 Description=Podman paperless-tika server
 BindsTo=paperlessngx-pod.service
-After=paperless-redis.service paperless-pgsql.service
+After=paperless-redis.service paperless-pgsql.service ns8-paperless-ngx.service paperless-gotenberg.service
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n
 EnvironmentFile=%S/state/environment
@@ -25,7 +25,6 @@ ExecStart=/usr/bin/podman run \
     --cidfile=%t/paperless-tika.ctr-id \
     --cgroups=no-conmon \
     --replace --name=%N \
-    --publish 127.0.0.1:${TIKA_TCP_PORT}:9998 \
     --env-file=smarthost.env \
     ${TIKA_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/paperless-tika.ctr-id -t 10

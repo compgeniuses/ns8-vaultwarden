@@ -10,7 +10,7 @@
 [Unit]
 Description=Podman ns8-paperless-ngx server
 BindsTo=paperlessngx-pod.service
-After=paperless-redis.service paperless-pgsql.service paperless-tika.service paperless-gotenberg.service 
+After=paperless-redis.service paperless-pgsql.service
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n
 EnvironmentFile=%S/state/environment
@@ -25,7 +25,6 @@ ExecStart=/usr/bin/podman run \
     --cidfile=%t/ns8-paperless-ngx.ctr-id \
     --cgroups=no-conmon \
     --replace --name=%N \
-    --env PAPERLESS_URL=${TRAEFIK_HOST} \
     --env-file=smarthost.env \
     ${PAPERLESS_NGX_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/ns8-paperless-ngx.ctr-id -t 10
