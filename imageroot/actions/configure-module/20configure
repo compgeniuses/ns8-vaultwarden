@@ -25,10 +25,11 @@ PAPERLESS_TIME_ZONE = data.get("PAPERLESS_TIME_ZONE","America/Los_Angeles")
 PAPERLESS_OCR_LANGUAGE = data.get("PAPERLESS_OCR_LANGUAGE","eng")
 PAPERLESS_COOKIE_PREFIX = data.get("PAPERLESS_COOKIE_PREFIX","paperlessngx")
 
+
 # tika and Gotenberg settings
 PAPERLESS_TIKA_ENABLED = data.get("PAPERLESS_TIKA_ENABLED","")
-PAPERLESS_TIKA_GOTENBERG_ENDPOINT = data.get("host_gotenberg","")
-PAPERLESS_TIKA_ENDPOINT = data.get("host_tika","")
+PAPERLESS_TIKA_GOTENBERG_ENDPOINT = data.get("gotenberg","")
+PAPERLESS_TIKA_ENDPOINT = data.get("tika","")
 
 # Db Config
 
