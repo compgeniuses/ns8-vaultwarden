@@ -26,11 +26,9 @@ PAPERLESS_OCR_LANGUAGE = data.get("PAPERLESS_OCR_LANGUAGE","eng")
 PAPERLESS_COOKIE_PREFIX = data.get("PAPERLESS_COOKIE_PREFIX","paperlessngx")
 
 # tika and Gotenberg settings
-PAPERLESS_TIKA_ENABLED = data.get("PAPERLESS_TIKA_ENABLED","1")
-
-# had been defined for tika
-PAPERLESS_TIKA_GOTENBERG_ENDPOINT = data.get("host_gotenberg","")
-PAPERLESS_TIKA_ENDPOINT = data.get("host_tika","")
+PAPERLESS_TIKA_ENABLED = data("PAPERLESS_TIKA_ENABLED","1")
+PAPERLESS_TIKA_GOTENBERG_ENDPOINT = data("host_gotenberg","")
+PAPERLESS_TIKA_ENDPOINT = data("host_tika","")
 
 # Db Config
 

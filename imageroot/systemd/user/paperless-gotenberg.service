@@ -25,7 +25,6 @@ ExecStart=/usr/bin/podman run \
     --cidfile=%t/paperless-gotenberg.ctr-id \
     --cgroups=no-conmon \
     --replace --name=%N \
-    --publish 127.0.0.1:${GOTENBERG_TCP_PORT}:3000 \
     --env-file=smarthost.env \
     ${GOTENBERG_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/paperless-gotenberg.ctr-id -t 10
