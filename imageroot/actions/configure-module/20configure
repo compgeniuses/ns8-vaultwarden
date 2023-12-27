@@ -29,8 +29,8 @@ PAPERLESS_COOKIE_PREFIX = data.get("PAPERLESS_COOKIE_PREFIX","paperlessngx")
 PAPERLESS_TIKA_ENABLED = data.get("PAPERLESS_TIKA_ENABLED","1")
 
 # had been defined for tika
-#PAPERLESS_TIKA_GOTENBERG_ENDPOINT = data.get("PAPERLESS_TIKA_GOTENBERG_ENDPOINT","")
-#PAPERLESS_TIKA_ENDPOINT = data.get("PAPERLESS_TIKA_ENDPOINT","")
+PAPERLESS_TIKA_GOTENBERG_ENDPOINT = data.get("host_gotenberg","")
+PAPERLESS_TIKA_ENDPOINT = data.get("host_tika","")
 
 # Db Config
 
@@ -63,8 +63,8 @@ agent.set_env("PAPERLESS_ADMIN_MAIL", PAPERLESS_ADMIN_MAIL)
 # Setup tika and gotenberg configuration from user input.
 agent.set_env("PAPERLESS_TIKA_ENABLED", PAPERLESS_TIKA_ENABLED)
 # had been defined for tika
-#agent.set_env("PAPERLESS_TIKA_GOTENBERG_ENDPOINT", PAPERLESS_TIKA_GOTENBERG_ENDPOINT)
-#agent.set_env("PAPERLESS_TIKA_ENDPOINT", PAPERLESS_TIKA_ENDPOINT)
+agent.set_env("host_gotenberg", PAPERLESS_TIKA_GOTENBERG_ENDPOINT)
+agent.set_env("host_tika", PAPERLESS_TIKA_ENDPOINT)
 
 # Setup PHP with safe defaults
 agent.set_env("PHP_ENABLE_OPCACHE", "1")
