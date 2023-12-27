@@ -54,6 +54,10 @@ Launch `configure-module`, by setting the following parameters:
 - `POSTGRES_PASSWORD`: the pgsql password
 - `lets_encrypt`: Set LEtsecnrypt to True or False, Default is FALSE
 - `http2https`: set redirect to True or False, Default is True
+- `PAPERLESS_URL`: This setting can be used to set the three options below (ALLOWED_HOSTS, CORS_ALLOWED_HOSTS and CSRF_TRUSTED_ORIGINS)
+- `PAPERLESS_ALLOWED_HOSTS`: <comma-separated-list> "example.com" is fine, as is "example.com,www.example.com"
+- `PAPERLESS_CSRF_TRUSTED_ORIGINS`: A list of trusted origins for unsafe requests, Can also be set using PAPERLESS_URL Defaults to empty string, which does not add any origins to the trusted list.
+- `PAPERLESS_CORS_ALLOWED_HOSTS`: You need to add your servers to the list of allowed hosts that can do CORS calls. Set this to your public domain name. Can also be set using PAPERLESS_URL (see above). Defaults to "http://localhost:8000".
 - ...
 
 Example:
