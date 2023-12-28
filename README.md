@@ -1,25 +1,5 @@
 # ns8-paperless ngx
-
-This is a ns8-paperless-ngx module for [NethServer 8](https://github.com/NethServer/ns8-core).
-This Modules uses: [PAperless NGX](https://github.com/paperless-ngx/paperless-ngx). 
-
-1. Rename some references inside the repo:
-   ```
-   modulename=$(basename $(pwd) | sed 's/^ns8-//')
-   git mv imageroot/systemd/user/ns8-paperless-ngx.service imageroot/systemd/user/${modulename}.service
-   git mv tests/ns8-paperless-ngx.robot tests/${modulename}.robot
-   sed -i "s/ns8-paperless-ngx/${modulename}/g" $(find .github/ * -type f)
-   git commit -a -m "Repository initialization"
-   ```
-
-1. Edit this `README.md` file, by replacing this section with your module
-   description
-
-1. Adjust `.github/workflows` to your needs. `clean-registry.yml` might
-   need the proper list of image names to work correctly. Unused workflows
-   can be disabled from the GitHub Actions interface.
-
-1. Commit and push your local changes
+Paperless-ngx is a community-supported open-source document management system that transforms your physical documents into a searchable online archive so you can keep, well, less paper.
 
 ## Install
 
@@ -39,25 +19,14 @@ Let's assume that the paperless instance is named `paperlessngx1`.
 Launch `configure-module`, by setting the following parameters:
 
 - `paperless_name`: the name given to the instance that wil also appear as the name on the dachboard
-- `PAPERLESS_SECRET_KEY`: a generated secret key that will be used as the project security key
-  `host`: the traefik host url for the project
 - `PAPERLESS_TIME_ZONE`: the timezone for the project, a config that can be modified
-- `http2https`: TRUE or FALSE
 - `PAPERLESS_TIME_ZONE`: the default is America/Los_Angeles
-- `PAPERLESS_TIKA_ENABLED`: Set 1 for true, or 0 for false
-- `gotenberg`: end point for gotenberg url PAPERLESS_TIKA_GOTENBERG_ENDPOINT
-- `tika`: the endpoint for tika url PAPERLESS_TIKA_ENDPOINT
 - `PAPERLESS_ADMIN_USER`: define the default username and password for superadmin: set to = paperlessadmin
 - `PAPERLESS_ADMIN_PASSWORD`: Define the Default password Set to = P@perle5$
-- `POSTGRES_DB`: the PGSQL db to be used
-- `POSTGRES_USER`: the pgsql username
-- `POSTGRES_PASSWORD`: the pgsql password
 - `lets_encrypt`: Set LEtsecnrypt to True or False, Default is FALSE
 - `http2https`: set redirect to True or False, Default is True
-- `PAPERLESS_URL`: This setting can be used to set the three options below (ALLOWED_HOSTS, CORS_ALLOWED_HOSTS and CSRF_TRUSTED_ORIGINS)
-- `PAPERLESS_ALLOWED_HOSTS`: <comma-separated-list> "example.com" is fine, as is "example.com,www.example.com"
-- `PAPERLESS_CSRF_TRUSTED_ORIGINS`: A list of trusted origins for unsafe requests, Can also be set using PAPERLESS_URL Defaults to empty string, which does not add any origins to the trusted list.
-- `PAPERLESS_CORS_ALLOWED_HOSTS`: You need to add your servers to the list of allowed hosts that can do CORS calls. Set this to your public domain name. Can also be set using PAPERLESS_URL (see above). Defaults to "http://localhost:8000".
+- `host`: the traefik host url for the project
+
 - ...
 
 Example:
@@ -67,6 +36,20 @@ Example:
     or if modifying another value: 
 
     api-cli run module/paperlessngx5/configure-module --data '{"host": "paperlessngx.domain.com","paperless_name": "MyPaperless NGX"}'
+
+    api-cli run module/paperlessngx1/configure-module --data '{
+        "host": "papperlessngx.rocky9-pve2.org",
+        "lets_encrypt": false,
+        "http2https": true,
+        "paperless_name": "paperless-ngx",
+        "PAPERLESS_ADMIN_PASSWORD": "P@perle5$",
+        "PAPERLESS_ADMIN_USER":"paperlessadmin",
+        "PAPERLESS_ADMIN_MAIL":"foo@domain.com",
+        "PAPERLESS_TIME_ZONE":"America/Los_Angeles",
+        "PAPERLESS_OCR_LANGUAGE":"eng",
+        "PAPERLESS_COOKIE_PREFIX":"paperlessngx"
+    }'
+
 
 The above command will:
 - start and configure the paperlessngx instance
@@ -95,7 +78,7 @@ Furthermore if smarthost setup is changed when ns8-paperless-ngx is already
 running, the event handler `events/smarthost-changed/10reload_services`
 restarts the main module service.
 
-See also the `systemd/user/ns8-paperless-ngx.service` file.
+See also the `systemd/user/paperless-server.service` file.
 
 This setting discovery is just an example to understand how the module is
 expected to work: it can be rewritten or discarded completely.

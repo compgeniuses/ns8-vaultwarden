@@ -9,9 +9,9 @@
 #
 
 [Unit]
-Description=Podman paperlessngx-pod.service
-Requires=paperless-redis.service paperless-pgsql.service ns8-paperless-ngx.service paperless-gotenberg.service paperless-tika.service
-Before=paperless-redis.service paperless-pgsql.service ns8-paperless-ngx.service paperless-gotenberg.service paperless-tika.service
+Description=Podman paperless.service
+Requires=paperless-redis.service paperless-pgsql.service paperless-server.service paperless-gotenberg.service paperless-tika.service
+Before=paperless-redis.service paperless-pgsql.service paperless-server.service paperless-gotenberg.service paperless-tika.service
 
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n

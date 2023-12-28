@@ -9,7 +9,7 @@
 #
 [Unit]
 Description=Podman ns8-paperless-ngx server
-BindsTo=paperlessngx-pod.service
+BindsTo=paperless.service
 After=paperless-redis.service paperless-pgsql.service
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n
@@ -26,6 +26,11 @@ ExecStart=/usr/bin/podman run \
     --cgroups=no-conmon \
     --replace --name=%N \
     --env-file=smarthost.env \
+    --env=PAPERLESS_* \
+    --volume=paperlessngx-data:/usr/src/paperless/data \
+    --volume=paperlessngx-media:/usr/src/paperless/media \
+    --volume=paperlessngx-export:/usr/src/paperless/export \
+    --volume=paperlessngx-consume:/usr/src/paperless/consume \
     ${PAPERLESS_NGX_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/ns8-paperless-ngx.ctr-id -t 10
 ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/ns8-paperless-ngx.ctr-id

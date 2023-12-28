@@ -37,7 +37,7 @@
               ref="username"
             >
             </cv-text-input> -->
-            <cv-text-input
+            <!-- <cv-text-input
               :label="$t('settings.PAPERLESS_SECRET_KEY')"
               v-model.trim="password"
               type="password"
@@ -48,7 +48,7 @@
               :disabled="loading.getConfiguration || loading.configureModule"
               ref="password"
             >
-            </cv-text-input>
+            </cv-text-input> -->
 
             <!-- <cv-text-input
               :label="$t('settings.admin_email')"
@@ -70,7 +70,7 @@
               ref="userFullName"
             >
             </cv-text-input> -->
-            <cv-text-input
+            <!-- <cv-text-input
               :label="$t('settings.PAPERLESS_UR')"
               placeholder="paperless.example.org"
               v-model.trim="host"
@@ -79,7 +79,7 @@
               :disabled="loading.getConfiguration || loading.configureModule"
               ref="host"
             >
-            </cv-text-input>
+            </cv-text-input> -->
             <cv-toggle
               value="letsEncrypt"
               :label="$t('settings.lets_encrypt')"

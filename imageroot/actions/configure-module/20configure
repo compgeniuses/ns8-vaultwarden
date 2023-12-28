@@ -9,15 +9,11 @@ import json
 import sys
 # agent is a NethServer library which provides function to communicate with the agent
 import agent
-data = json.load(sys.stdin)
 
-# TODO: do something with the request payload. For example configure a
-# custom route in our web router. Here the path is hardcoded as
-# 'kickstart'.
+data = json.load(sys.stdin)
 
 # Setup default values
 paperless_name = data.get("paperless_name","paperless-ngx")
-PAPERLESS_SECRET_KEY = data.get("PAPERLESS_SECRET_KEY","hdswihrdvysjbjiiubajbcjhidfnskjbcjhvikjsbjhk")
 PAPERLESS_ADMIN_USER = data.get("PAPERLESS_ADMIN_USER","paperlessadmin")
 PAPERLESS_ADMIN_PASSWORD = data.get("PAPERLESS_ADMIN_PASSWORD","P@perle5$")
 PAPERLESS_ADMIN_MAIL = data.get("PAPERLESS_ADMIN_MAIL","")
@@ -26,17 +22,9 @@ PAPERLESS_OCR_LANGUAGE = data.get("PAPERLESS_OCR_LANGUAGE","eng")
 PAPERLESS_COOKIE_PREFIX = data.get("PAPERLESS_COOKIE_PREFIX","paperlessngx")
 
 # PAperless CSRF settings
-PAPERLESS_URL = data.get("PAPERLESS_URL","")
-PAPERLESS_ALLOWED_HOSTS = data.get("PAPERLESS_ALLOWED_HOSTS","localhost")
-PAPERLESS_CSRF_TRUSTED_ORIGINS = data.get("PAPERLESS_CSRF_TRUSTED_ORIGINS","")
-PAPERLESS_CORS_ALLOWED_HOSTS = data.get("PAPERLESS_CORS_ALLOWED_HOSTS","http://localhost:3000")
-PAPERLESS_USE_X_FORWARD_HOST = data.get("PAPERLESS_USE_X_FORWARD_HOST","True")
-PAPERLESS_PROXY_SSL_HEADER = data.get("PAPERLESS_PROXY_SSL_HEADER","")
+host = data.get("host", "")
+PAPERLESS_URL = "https://"+host
 
-# tika and Gotenberg settings
-PAPERLESS_TIKA_ENABLED = data.get("PAPERLESS_TIKA_ENABLED","")
-PAPERLESS_TIKA_GOTENBERG_ENDPOINT = data.get("gotenberg","")
-PAPERLESS_TIKA_ENDPOINT = data.get("tika","")
 
 # Db Config
 
@@ -58,7 +46,6 @@ agent.write_envfile('database.env', db_config)
 
 # Setup configuration from user input.
 agent.set_env("PAPERLESS_NGX_NAME", paperless_name)
-agent.set_env("PAPERLESS_SECRET_KEY", PAPERLESS_SECRET_KEY)
 agent.set_env("PAPERLESS_TIME_ZONE", PAPERLESS_TIME_ZONE)
 agent.set_env("PAPERLESS_OCR_LANGUAGE", PAPERLESS_OCR_LANGUAGE)
 agent.set_env("PAPERLESS_COOKIE_PREFIX", PAPERLESS_COOKIE_PREFIX)
@@ -68,16 +55,11 @@ agent.set_env("PAPERLESS_ADMIN_MAIL", PAPERLESS_ADMIN_MAIL)
 
 #paperless CSRF settings
 agent.set_env("PAPERLESS_URL", PAPERLESS_URL)
-agent.set_env("PAPERLESS_ALLOWED_HOSTS", PAPERLESS_ALLOWED_HOSTS)
-agent.set_env("PAPERLESS_CSRF_TRUSTED_ORIGINS", PAPERLESS_CSRF_TRUSTED_ORIGINS)
-agent.set_env("PAPERLESS_CORS_ALLOWED_HOSTS", PAPERLESS_CORS_ALLOWED_HOSTS)
-agent.set_env("PAPERLESS_USE_X_FORWARD_HOST", PAPERLESS_USE_X_FORWARD_HOST)
-agent.set_env("PAPERLESS_PROXY_SSL_HEADER", PAPERLESS_PROXY_SSL_HEADER)
 
 # Setup tika and gotenberg configuration from user input.
-agent.set_env("PAPERLESS_TIKA_ENABLED", PAPERLESS_TIKA_ENABLED)
-agent.set_env("gotenberg", PAPERLESS_TIKA_GOTENBERG_ENDPOINT)
-agent.set_env("tika", PAPERLESS_TIKA_ENDPOINT)
+agent.set_env("PAPERLESS_TIKA_ENABLED", "1")
+agent.set_env("PAPERLESS_TIKA_GOTENBERG_ENDPOINT", "http://127.0.0.1:3000")
+agent.set_env("PAPERLESS_TIKA_ENDPOINT", "http://127.0.0.1:9998")
 
 # Setup PHP with safe defaults
 agent.set_env("PHP_ENABLE_OPCACHE", "1")
