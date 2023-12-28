@@ -1,25 +1,5 @@
 # ns8-paperless ngx
-
-This is a ns8-paperless-ngx module for [NethServer 8](https://github.com/NethServer/ns8-core).
-This Modules uses: [PAperless NGX](https://github.com/paperless-ngx/paperless-ngx). 
-
-1. Rename some references inside the repo:
-   ```
-   modulename=$(basename $(pwd) | sed 's/^ns8-//')
-   git mv imageroot/systemd/user/ns8-paperless-ngx.service imageroot/systemd/user/${modulename}.service
-   git mv tests/ns8-paperless-ngx.robot tests/${modulename}.robot
-   sed -i "s/ns8-paperless-ngx/${modulename}/g" $(find .github/ * -type f)
-   git commit -a -m "Repository initialization"
-   ```
-
-1. Edit this `README.md` file, by replacing this section with your module
-   description
-
-1. Adjust `.github/workflows` to your needs. `clean-registry.yml` might
-   need the proper list of image names to work correctly. Unused workflows
-   can be disabled from the GitHub Actions interface.
-
-1. Commit and push your local changes
+Paperless-ngx is a community-supported open-source document management system that transforms your physical documents into a searchable online archive so you can keep, well, less paper.
 
 ## Install
 
@@ -95,7 +75,7 @@ Furthermore if smarthost setup is changed when ns8-paperless-ngx is already
 running, the event handler `events/smarthost-changed/10reload_services`
 restarts the main module service.
 
-See also the `systemd/user/ns8-paperless-ngx.service` file.
+See also the `systemd/user/paperless-server.service` file.
 
 This setting discovery is just an example to understand how the module is
 expected to work: it can be rewritten or discarded completely.
