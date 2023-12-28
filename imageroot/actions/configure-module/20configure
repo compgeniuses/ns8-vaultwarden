@@ -23,7 +23,7 @@ PAPERLESS_COOKIE_PREFIX = data.get("PAPERLESS_COOKIE_PREFIX","paperlessngx")
 
 # PAperless CSRF settings
 host = data.get("host", "")
-PAPERLESS_URL = data.get("PAPERLESS_URL", "https://"+host)
+PAPERLESS_URL = "https://"+host
 
 
 # Db Config
