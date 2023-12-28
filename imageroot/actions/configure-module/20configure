@@ -9,11 +9,14 @@ import json
 import sys
 # agent is a NethServer library which provides function to communicate with the agent
 import agent
+import secrets
+
 data = json.load(sys.stdin)
 
 # Setup default values
 paperless_name = data.get("paperless_name","paperless-ngx")
-PAPERLESS_SECRET_KEY = data.get("PAPERLESS_SECRET_KEY","hdswihrdvysjbjiiubajbcjhidfnskjbcjhvikjsbjhk")
+random_key = secrets.token_hex(16)
+PAPERLESS_SECRET_KEY = data.get("PAPERLESS_SECRET_KEY",random_key)
 PAPERLESS_ADMIN_USER = data.get("PAPERLESS_ADMIN_USER","paperlessadmin")
 PAPERLESS_ADMIN_PASSWORD = data.get("PAPERLESS_ADMIN_PASSWORD","P@perle5$")
 PAPERLESS_ADMIN_MAIL = data.get("PAPERLESS_ADMIN_MAIL","")
