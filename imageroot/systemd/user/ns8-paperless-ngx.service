@@ -26,6 +26,7 @@ ExecStart=/usr/bin/podman run \
     --cgroups=no-conmon \
     --replace --name=%N \
     --env-file=smarthost.env \
+    --env=PAPERLESS_* \
     ${PAPERLESS_NGX_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/ns8-paperless-ngx.ctr-id -t 10
 ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/ns8-paperless-ngx.ctr-id
