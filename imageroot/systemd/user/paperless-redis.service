@@ -1,6 +1,6 @@
 [Unit]
 Description=Podman paperless-redis.service
-BindsTo=paperlessngx-pod.service
+BindsTo=paperless.service
 After=paperless-pgsql.service
 
 [Service]
