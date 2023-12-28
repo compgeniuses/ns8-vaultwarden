@@ -13,8 +13,6 @@ data = json.load(sys.stdin)
 
 # Setup default values
 host = data.get("host", "")
-gotenberg = data.get("gotenberg", "")
-tika = data.get("tika", "")
 h2hs = data.get("http2https", True)
 le = data.get("lets_encrypt", True)
 
@@ -23,11 +21,6 @@ le = data.get("lets_encrypt", True)
 agent.set_env("TRAEFIK_HOST", host)
 agent.set_env("TRAEFIK_HTTP2HTTPS", h2hs)
 agent.set_env("TRAEFIK_LETS_ENCRYPT", le)
-agent.set_env("PAPERLESS_TIKA_GOTENBERG_ENDPOINT", gotenberg)
-agent.set_env("PAPERLESS_TIKA_ENDPOINT", tika)
-
-
-# Multiple ports Definition
 
 # Make sure everything is saved inside the environment file
 # just before starting systemd unit
@@ -47,7 +40,7 @@ response = agent.tasks.run(
         'url': f'http://127.0.0.1:{os.environ["TCP_PORT"]}',
         'host': host,
         'lets_encrypt': le,
-        'http2https': h2hs
+        'http2https': h2hs,
     },
 )
 
