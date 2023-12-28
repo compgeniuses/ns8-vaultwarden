@@ -9,7 +9,7 @@
 #
 [Unit]
 Description=Podman paperless-tika server
-BindsTo=paperlessngx-pod.service
+BindsTo=paperless.service
 After=paperless-redis.service paperless-pgsql.service ns8-paperless-ngx.service paperless-gotenberg.service
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n
