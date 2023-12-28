@@ -27,9 +27,9 @@ PAPERLESS_COOKIE_PREFIX = data.get("PAPERLESS_COOKIE_PREFIX","paperlessngx")
 
 # PAperless CSRF settings
 PAPERLESS_URL = data.get("PAPERLESS_URL","")
-PAPERLESS_ALLOWED_HOSTS = data.get("PAPERLESS_ALLOWED_HOSTS","")
+PAPERLESS_ALLOWED_HOSTS = data.get("PAPERLESS_ALLOWED_HOSTS","localhost")
 PAPERLESS_CSRF_TRUSTED_ORIGINS = data.get("PAPERLESS_CSRF_TRUSTED_ORIGINS","")
-PAPERLESS_CORS_ALLOWED_HOSTS = data.get("PAPERLESS_CORS_ALLOWED_HOSTS","")
+PAPERLESS_CORS_ALLOWED_HOSTS = data.get("PAPERLESS_CORS_ALLOWED_HOSTS","http://localhost:3000")
 
 # tika and Gotenberg settings
 PAPERLESS_TIKA_ENABLED = data.get("PAPERLESS_TIKA_ENABLED","")
@@ -72,14 +72,14 @@ agent.set_env("PAPERLESS_CORS_ALLOWED_HOSTS", PAPERLESS_CORS_ALLOWED_HOSTS)
 
 
 # Setup tika and gotenberg configuration from user input.
-agent.set_env("PAPERLESS_TIKA_ENABLED", PAPERLESS_TIKA_ENABLED)
+agent.set_env("PAPERLESS_TIKA_ENABLED", PAPERLESS_TIKA_ENABLED,"1")
 agent.set_env("gotenberg", PAPERLESS_TIKA_GOTENBERG_ENDPOINT)
 agent.set_env("tika", PAPERLESS_TIKA_ENDPOINT)
 
 # Setup PHP with safe defaults
 agent.set_env("PHP_ENABLE_OPCACHE", "1")
 agent.set_env("PHP_MEMORY_LIMIT", "512M")
-# Configure Traefik to route "/kickstart" path requests to the kickstart service
+# Configure Traefik to route "/paperlessngx" path requests to the paperlessngx service
 
 
 # Make sure everything is saved inside the environment file
