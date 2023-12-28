@@ -22,7 +22,9 @@ PAPERLESS_OCR_LANGUAGE = data.get("PAPERLESS_OCR_LANGUAGE","eng")
 PAPERLESS_COOKIE_PREFIX = data.get("PAPERLESS_COOKIE_PREFIX","paperlessngx")
 
 # PAperless CSRF settings
-PAPERLESS_URL = data.get("PAPERLESS_URL","")
+host = data.get("host", "")
+PAPERLESS_URL = data.get("PAPERLESS_URL", "https://"+host)
+
 
 # tika and Gotenberg settings
 PAPERLESS_TIKA_ENABLED = data.get("PAPERLESS_TIKA_ENABLED","1")
