@@ -11,10 +11,6 @@ import sys
 import agent
 data = json.load(sys.stdin)
 
-# TODO: do something with the request payload. For example configure a
-# custom route in our web router. Here the path is hardcoded as
-# 'kickstart'.
-
 # Setup default values
 paperless_name = data.get("paperless_name","paperless-ngx")
 PAPERLESS_SECRET_KEY = data.get("PAPERLESS_SECRET_KEY","hdswihrdvysjbjiiubajbcjhidfnskjbcjhvikjsbjhk")
@@ -27,16 +23,11 @@ PAPERLESS_COOKIE_PREFIX = data.get("PAPERLESS_COOKIE_PREFIX","paperlessngx")
 
 # PAperless CSRF settings
 PAPERLESS_URL = data.get("PAPERLESS_URL","")
-PAPERLESS_ALLOWED_HOSTS = data.get("PAPERLESS_ALLOWED_HOSTS","localhost")
-PAPERLESS_CSRF_TRUSTED_ORIGINS = data.get("PAPERLESS_CSRF_TRUSTED_ORIGINS","")
-PAPERLESS_CORS_ALLOWED_HOSTS = data.get("PAPERLESS_CORS_ALLOWED_HOSTS","http://localhost:3000")
-PAPERLESS_USE_X_FORWARD_HOST = data.get("PAPERLESS_USE_X_FORWARD_HOST","True")
-PAPERLESS_PROXY_SSL_HEADER = data.get("PAPERLESS_PROXY_SSL_HEADER","")
 
 # tika and Gotenberg settings
-PAPERLESS_TIKA_ENABLED = data.get("PAPERLESS_TIKA_ENABLED","")
-PAPERLESS_TIKA_GOTENBERG_ENDPOINT = data.get("gotenberg","")
-PAPERLESS_TIKA_ENDPOINT = data.get("tika","")
+PAPERLESS_TIKA_ENABLED = data.get("PAPERLESS_TIKA_ENABLED","1")
+PAPERLESS_TIKA_GOTENBERG_ENDPOINT = data.get("gotenberg","http://127.0.0.1:3000")
+PAPERLESS_TIKA_ENDPOINT = data.get("tika","http://127.0.0.1:9998")
 
 # Db Config
 
@@ -68,11 +59,6 @@ agent.set_env("PAPERLESS_ADMIN_MAIL", PAPERLESS_ADMIN_MAIL)
 
 #paperless CSRF settings
 agent.set_env("PAPERLESS_URL", PAPERLESS_URL)
-agent.set_env("PAPERLESS_ALLOWED_HOSTS", PAPERLESS_ALLOWED_HOSTS)
-agent.set_env("PAPERLESS_CSRF_TRUSTED_ORIGINS", PAPERLESS_CSRF_TRUSTED_ORIGINS)
-agent.set_env("PAPERLESS_CORS_ALLOWED_HOSTS", PAPERLESS_CORS_ALLOWED_HOSTS)
-agent.set_env("PAPERLESS_USE_X_FORWARD_HOST", PAPERLESS_USE_X_FORWARD_HOST)
-agent.set_env("PAPERLESS_PROXY_SSL_HEADER", PAPERLESS_PROXY_SSL_HEADER)
 
 # Setup tika and gotenberg configuration from user input.
 agent.set_env("PAPERLESS_TIKA_ENABLED", PAPERLESS_TIKA_ENABLED)
