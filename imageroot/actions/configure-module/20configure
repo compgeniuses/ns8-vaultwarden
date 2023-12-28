@@ -26,11 +26,6 @@ host = data.get("host", "")
 PAPERLESS_URL = data.get("PAPERLESS_URL", "https://"+host)
 
 
-# tika and Gotenberg settings
-PAPERLESS_TIKA_ENABLED = data.get("PAPERLESS_TIKA_ENABLED","1")
-PAPERLESS_TIKA_GOTENBERG_ENDPOINT = data.get("gotenberg","http://127.0.0.1:3000")
-PAPERLESS_TIKA_ENDPOINT = data.get("tika","http://127.0.0.1:9998")
-
 # Db Config
 
 POSTGRES_DB = data.get("POSTGRES_DB","paperless")
@@ -62,9 +57,9 @@ agent.set_env("PAPERLESS_ADMIN_MAIL", PAPERLESS_ADMIN_MAIL)
 agent.set_env("PAPERLESS_URL", PAPERLESS_URL)
 
 # Setup tika and gotenberg configuration from user input.
-agent.set_env("PAPERLESS_TIKA_ENABLED", PAPERLESS_TIKA_ENABLED)
-agent.set_env("gotenberg", PAPERLESS_TIKA_GOTENBERG_ENDPOINT)
-agent.set_env("tika", PAPERLESS_TIKA_ENDPOINT)
+agent.set_env("PAPERLESS_TIKA_ENABLED", "1")
+agent.set_env("PAPERLESS_TIKA_GOTENBERG_ENDPOINT", "http://127.0.0.1:3000")
+agent.set_env("PAPERLESS_TIKA_ENDPOINT", "http://127.0.0.1:9998")
 
 # Setup PHP with safe defaults
 agent.set_env("PHP_ENABLE_OPCACHE", "1")
