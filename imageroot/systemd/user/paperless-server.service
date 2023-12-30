@@ -14,6 +14,7 @@ After=paperless-redis.service paperless-pgsql.service
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n
 EnvironmentFile=%S/state/environment
+EnvironmentFile=%S/state/database.env
 WorkingDirectory=%S/state
 Restart=always
 ExecStartPre=/bin/rm -f %t/ns8-paperless-ngx.pid %t/ns8-paperless-ngx.ctr-id
@@ -27,6 +28,10 @@ ExecStart=/usr/bin/podman run \
     --replace --name=%N \
     --env-file=smarthost.env \
     --env=PAPERLESS_* \
+    --env=PAPERLESS_DBHOST=127.0.0.1 \
+    --env=PAPERLESS_DBNAME=${POSTGRES_DATABASE} \
+    --env=PAPERLESS_DBUSER=${POSTGRES_USER} \
+    --env=PAPERLESS_DBPASS=${POSTGRES_PASSWORD} \
     --volume=paperlessngx-data:/usr/src/paperless/data \
     --volume=paperlessngx-media:/usr/src/paperless/media \
     --volume=paperlessngx-export:/usr/src/paperless/export \
