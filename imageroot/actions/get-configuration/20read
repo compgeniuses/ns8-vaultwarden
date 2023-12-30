@@ -23,5 +23,6 @@ config["PAPERLESS_ADMIN_USER"] = os.getenv("PAPERLESS_ADMIN_USER","")
 config["PAPERLESS_ADMIN_PASSWORD"] = os.getenv("PAPERLESS_ADMIN_PASSWORD","")
 config["PAPERLESS_ADMIN_MAIL"] = os.getenv("PAPERLESS_ADMIN_MAIL","")
 config["PAPERLESS_COOKIE_PREFIX"] = os.getenv("PAPERLESS_COOKIE_PREFIX","")
+config["PAPERLESS_FILENAME_FORMAT"] = os.getenv("PAPERLESS_FILENAME_FORMAT","")
 
 json.dump(config, fp=sys.stdout)
