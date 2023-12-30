@@ -45,5 +45,6 @@ for evar in [
         "PAPERLESS_TIKA_ENDPOINT",
         "PHP_ENABLE_OPCACHE",
         "PHP_MEMORY_LIMIT",
+        "PAPERLESS_FILENAME_FORMAT",
     ]:
     agent.set_env(evar, original_environment[evar])
