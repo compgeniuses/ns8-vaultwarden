@@ -28,6 +28,7 @@ ExecStart=/usr/bin/podman run \
     --replace --name=%N \
     --env-file=smarthost.env \
     --env=PAPERLESS_* \
+    --env=PAPERLESS_DBENGINE=postgresql \
     --env=PAPERLESS_DBHOST=127.0.0.1 \
     --env=PAPERLESS_DBNAME=${POSTGRES_DATABASE} \
     --env=PAPERLESS_DBUSER=${POSTGRES_USER} \
