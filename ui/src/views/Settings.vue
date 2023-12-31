@@ -20,58 +20,7 @@
         <cv-tile :light="true">
           <cv-form @submit.prevent="configureModule">
             <cv-text-input
-              :label="$t('settings.paperless_name')"
-              v-model.trim="paperless"
-              class="mg-bottom"
-              :invalid-message="$t(error.paperless_name)"
-              :disabled="loading.getConfiguration || loading.configureModule"
-              ref="paperless"
-            >
-            </cv-text-input>
-            <!-- <cv-text-input
-              :label="$t('settings.admin_username')"
-              v-model.trim="username"
-              class="mg-bottom"
-              :invalid-message="$t(error.username)"
-              :disabled="loading.getConfiguration || loading.configureModule"
-              ref="username"
-            >
-            </cv-text-input> -->
-            <!-- <cv-text-input
-              :label="$t('settings.PAPERLESS_SECRET_KEY')"
-              v-model.trim="password"
-              type="password"
-              :password-show-label="$t('settings.show_password')"
-              :password-hide-label="$t('settings.hide_password')"
-              class="mg-bottom"
-              :invalid-message="$t(error.password)"
-              :disabled="loading.getConfiguration || loading.configureModule"
-              ref="password"
-            >
-            </cv-text-input> -->
-
-            <!-- <cv-text-input
-              :label="$t('settings.admin_email')"
-              placeholder="admin@example.com"
-              v-model.trim="email"
-              class="mg-bottom"
-              :invalid-message="$t(error.email)"
-              :disabled="loading.getConfiguration || loading.configureModule"
-              ref="email"
-            >
-            </cv-text-input> -->
-
-            <!-- <cv-text-input
-              :label="$t('settings.admin_full_name')"
-              v-model.trim="userFullName"
-              class="mg-bottom"
-              :invalid-message="$t(error.user_full_name)"
-              :disabled="loading.getConfiguration || loading.configureModule"
-              ref="userFullName"
-            >
-            </cv-text-input> -->
-            <!-- <cv-text-input
-              :label="$t('settings.PAPERLESS_UR')"
+              :label="$t('settings.host')"
               placeholder="paperless.example.org"
               v-model.trim="host"
               class="mg-bottom"
@@ -79,7 +28,17 @@
               :disabled="loading.getConfiguration || loading.configureModule"
               ref="host"
             >
-            </cv-text-input> -->
+            </cv-text-input>
+            <cv-password-input
+              :label="$t('settings.PAPERLESS_ADMIN_PASSWORD')"
+              placeholder="***************"
+              v-model.trim="PAPERLESS_ADMIN_PASSWORD"
+              class="mg-bottom"
+              :invalid-message="$t(error.host)"
+              :disabled="loading.getConfiguration || loading.configureModule"
+              ref="PAPERLESS_ADMIN_PASSWORD"
+            >
+            </cv-password-input>
             <cv-toggle
               value="letsEncrypt"
               :label="$t('settings.lets_encrypt')"
@@ -154,11 +113,6 @@ export default {
         page: "settings",
       },
       urlCheckInterval: null,
-      paperless: "",
-      username: "",
-      password: "",
-      email: "",
-      userFullName: "",
       host: "",
       isLetsEncryptEnabled: false,
       isHttpToHttpsEnabled: false,
@@ -169,12 +123,8 @@ export default {
       error: {
         getConfiguration: "",
         configureModule: "",
-        paperless: "",
-        username: "",
-        password: "",
-        user_full_name: "",
-        email: "",
         host: "",
+        PAPERLESS_ADMIN_PASSWORD: "",
         lets_encrypt: "",
         http2https: "",
       },
@@ -241,81 +191,31 @@ export default {
     },
     getConfigurationCompleted(taskContext, taskResult) {
       const config = taskResult.output;
-      this.paperlessName = config.paperless_name;
-      this.username = config.PAPERLESS_ADMIN_USER;
-      this.password = config.PAPERLESS_ADMIN_PASSWORD;
-      this.userFullName = config.user_full_name;
-      this.email = config.PAPERLESS_ADMIN_MAIL;
       this.host = config.host;
+      this.PAPERLESS_ADMIN_PASSWORD = config.PAPERLESS_ADMIN_PASSWORD;
       this.isLetsEncryptEnabled = config.lets_encrypt;
       this.isHttpToHttpsEnabled = config.http2https;
       this.loading.getConfiguration = false;
-      this.focusElement("paperlessName");
+      this.focusElement("host");
     },
     validateConfigureModule() {
       this.clearErrors(this);
 
       let isValidationOk = true;
 
-      if (!this.wikiName) {
-        this.error.wiki_name = "common.required";
-
-        if (isValidationOk) {
-          this.focusElement("paperlessName");
-        }
-        isValidationOk = false;
-      }
-
-      if (!this.username) {
-        this.error.username = "common.required";
-
-        if (isValidationOk) {
-          this.focusElement("username");
-        }
-        isValidationOk = false;
-      }
-
-      if (!this.password) {
-        this.error.password = "common.required";
-
-        if (isValidationOk) {
-          this.focusElement("password");
-        }
-        isValidationOk = false;
-      }
-
-      if (!this.email) {
-        this.error.email = "common.required";
-
-        if (isValidationOk) {
-          this.focusElement("email");
-        }
-        isValidationOk = false;
-      }
-
-      if (this.email && !/^\S+@\S+$/.test(this.email)) {
-        this.error.email = "settings.email_format";
-
-        if (isValidationOk) {
-          this.focusElement("email");
-        }
-        isValidationOk = false;
-      }
-
-      if (!this.userFullName) {
-        this.error.user_full_name = "common.required";
-
-        if (isValidationOk) {
-          this.focusElement("userFullName");
-        }
-        isValidationOk = false;
-      }
-
       if (!this.host) {
         this.error.host = "common.required";
 
         if (isValidationOk) {
           this.focusElement("host");
+        }
+        isValidationOk = false;
+      }
+      if (!this.PAPERLESS_ADMIN_PASSWORD) {
+        this.error.PAPERLESS_ADMIN_PASSWORD = "common.required";
+
+        if (isValidationOk) {
+          this.focusElement("PAPERLESS_ADMIN_PASSWORD");
         }
         isValidationOk = false;
       }
@@ -371,11 +271,6 @@ export default {
         this.createModuleTaskForApp(this.instanceName, {
           action: taskAction,
           data: {
-            paperless_name: this.paperlessName,
-            username: this.username,
-            password: this.password,
-            user_full_name: this.userFullName,
-            email: this.email,
             host: this.host,
             lets_encrypt: this.isLetsEncryptEnabled,
             http2https: this.isHttpToHttpsEnabled,
