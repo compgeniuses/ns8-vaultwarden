@@ -20,7 +20,7 @@
         <cv-tile :light="true">
           <cv-form @submit.prevent="configureModule">
             <cv-text-input
-              :label="$t('settings.host')"
+              :label="$t('settings.paperless_fqdn')"
               placeholder="paperless.example.org"
               v-model.trim="host"
               class="mg-bottom"
@@ -29,16 +29,27 @@
               ref="host"
             >
             </cv-text-input>
-            <cv-password-input
-              :label="$t('settings.PAPERLESS_ADMIN_PASSWORD')"
-              placeholder="***************"
-              v-model.trim="PAPERLESS_ADMIN_PASSWORD"
+            <cv-text-input
+              :label="$t('settings.paperless_admin')"
+              placeholder="paperlessadmin"
+              v-model="PAPERLESS_ADMIN_USER"
               class="mg-bottom"
-              :invalid-message="$t(error.host)"
+              :invalid-message="$t(error.PAPERLESS_ADMIN_USER)"
               :disabled="loading.getConfiguration || loading.configureModule"
+              ref="PAPERLESS_ADMIN_USER"
+            >
+            </cv-text-input>
+            <cv-text-input
+              :label="$t('settings.paperless_admin_password')"
+              placeholder="P@perle5$"
+              v-model="PAPERLESS_ADMIN_PASSWORD"
+              class="mg-bottom"
+              :invalid-message="$t(error.PAPERLESS_ADMIN_PASSWORD)"
+              :disabled="loading.getConfiguration || loading.configureModule"
+              type="password"
               ref="PAPERLESS_ADMIN_PASSWORD"
             >
-            </cv-password-input>
+            </cv-text-input>
             <cv-toggle
               value="letsEncrypt"
               :label="$t('settings.lets_encrypt')"
@@ -114,6 +125,8 @@ export default {
       },
       urlCheckInterval: null,
       host: "",
+      PAPERLESS_ADMIN_USER: "",
+      PAPERLESS_ADMIN_PASSWORD: "",
       isLetsEncryptEnabled: false,
       isHttpToHttpsEnabled: false,
       loading: {
@@ -124,6 +137,7 @@ export default {
         getConfiguration: "",
         configureModule: "",
         host: "",
+        PAPERLESS_ADMIN_USER: "",
         PAPERLESS_ADMIN_PASSWORD: "",
         lets_encrypt: "",
         http2https: "",
@@ -192,6 +206,7 @@ export default {
     getConfigurationCompleted(taskContext, taskResult) {
       const config = taskResult.output;
       this.host = config.host;
+      this.PAPERLESS_ADMIN_USER = config.PAPERLESS_ADMIN_USER;
       this.PAPERLESS_ADMIN_PASSWORD = config.PAPERLESS_ADMIN_PASSWORD;
       this.isLetsEncryptEnabled = config.lets_encrypt;
       this.isHttpToHttpsEnabled = config.http2https;
@@ -208,6 +223,14 @@ export default {
 
         if (isValidationOk) {
           this.focusElement("host");
+        }
+        isValidationOk = false;
+      }
+      if (!this.PAPERLESS_ADMIN_USER) {
+        this.error.PAPERLESS_ADMIN_USER = "common.required";
+
+        if (isValidationOk) {
+          this.focusElement("PAPERLESS_ADMIN_USER");
         }
         isValidationOk = false;
       }
@@ -272,6 +295,8 @@ export default {
           action: taskAction,
           data: {
             host: this.host,
+            PAPERLESS_ADMIN_USER: this.PAPERLESS_ADMIN_USER,
+            PAPERLESS_ADMIN_PASSWORD: this.PAPERLESS_ADMIN_PASSWORD,
             lets_encrypt: this.isLetsEncryptEnabled,
             http2https: this.isHttpToHttpsEnabled,
           },
