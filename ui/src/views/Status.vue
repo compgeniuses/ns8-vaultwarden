@@ -40,6 +40,27 @@
       </cv-column>
     </cv-row>
     <cv-row>
+      <template v-if="host">
+        <cv-column :md="4" :max="4">
+          <NsInfoCard
+            light
+            :title="$t('status.paperless_url')"
+            :icon="Settings32"
+            :loading="loading.getStatus"
+            class="min-height-card"
+          >
+          <template slot="content">
+            <div class="card-rows">
+              <div class="card-row">
+                <NsButton kind="ghost" :icon="Launch20" @click="goToPaperless">
+                  {{ $t("status.open_paperless_page") }}
+                </NsButton>
+              </div>
+            </div>
+          </template>
+          </NsInfoCard>
+        </cv-column>
+      </template>
       <cv-column :md="4" :max="4">
         <NsInfoCard
           light
@@ -346,6 +367,10 @@ export default {
     this.getStatus();
     this.listBackupRepositories();
   },
+  methods: {
+    goToMattermost() {
+        window.open('http://' + this.host);
+    },
   methods: {
     async getStatus() {
       this.loading.getStatus = true;

@@ -1,12 +1,12 @@
 {
   "name": "paperless",
   "description": {
-    "en": "PAperless ngx"
+    "en": "Paperless ngx"
   },
-  "categories": [],
+  "categories": ["collaboration"],
   "authors": [
     {
-      "name": "MArtin Bhuong",
+      "name": "Martin Bhuong",
       "email": "martin@genius.ke"
     }
   ],
