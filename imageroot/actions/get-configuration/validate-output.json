@@ -73,20 +73,6 @@
    
     },
     "required": [
-        "paperless_name",
-        "PAPERLESS_ADMIN_USER",
-        "PAPERLESS_ADMIN_PASSWORD",
-        "PAPERLESS_ADMIN_MAIL",
-        "PAPERLESS_TIME_ZONE",
-        "PAPERLESS_OCR_LANGUAGE",
-        "PAPERLESS_COOKIE_PREFIX",
-        "host",
-        "PAPERLESS_URL",
-        "POSTGRES_DB",
-        "POSTGRES_USER",
-        "POSTGRES_PASSWORD",
-        "PAPERLESS_TIKA_ENABLED",
-        "PHP_ENABLE_OPCACHE",
-        "PHP_MEMORY_LIMIT"
+        "host"
     ]
 }
