@@ -38,6 +38,7 @@
               :disabled="loading.getConfiguration || loading.configureModule"
               ref="PAPERLESS_ADMIN_USER"
             >
+          </cv-text-input>
             <cv-text-input
               :label="$t('settings.paperless_admin_password')"
               placeholder="P@perle5$"
