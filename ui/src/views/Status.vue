@@ -367,11 +367,11 @@ export default {
     this.getStatus();
     this.listBackupRepositories();
   },
+ 
   methods: {
     goToMattermost() {
         window.open('http://' + this.host);
     },
-  methods: {
     async getStatus() {
       this.loading.getStatus = true;
       this.error.getStatus = "";
