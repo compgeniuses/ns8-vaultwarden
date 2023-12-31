@@ -32,19 +32,20 @@
             <cv-text-input
               :label="$t('settings.paperless_admin')"
               placeholder="paperlessadmin"
-              v-model.trim="PAPERLESS_ADMIN_USER"
+              v-model="PAPERLESS_ADMIN_USER"
               class="mg-bottom"
-              :invalid-message="$t(error.host)"
+              :invalid-message="$t(error.PAPERLESS_ADMIN_USER)"
               :disabled="loading.getConfiguration || loading.configureModule"
               ref="PAPERLESS_ADMIN_USER"
             >
             <cv-text-input
               :label="$t('settings.paperless_admin_password')"
               placeholder="P@perle5$"
-              v-model.trim="PAPERLESS_ADMIN_PASSWORD"
+              v-model="PAPERLESS_ADMIN_PASSWORD"
               class="mg-bottom"
-              :invalid-message="$t(error.host)"
+              :invalid-message="$t(error.PAPERLESS_ADMIN_PASSWORD)"
               :disabled="loading.getConfiguration || loading.configureModule"
+              type="password"
               ref="PAPERLESS_ADMIN_PASSWORD"
             >
             </cv-text-input>
