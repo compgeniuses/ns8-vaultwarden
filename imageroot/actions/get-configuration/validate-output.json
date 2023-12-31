@@ -37,7 +37,7 @@
             "type": "string"
         },
         "PAPERLESS_TIME_ZONE": {
-            "type": "boolean"
+            "type": "string"
         },
         "PAPERLESS_OCR_LANGUAGE": {
             "type": "string"
