@@ -61,7 +61,7 @@
                                       >
                                       </cv-text-input>
                                       <cv-text-input
-                                        :label="$t('settings.PAPERLESS_ADMIN_PASSWORD')"
+                                        :label="$t('PAperless Admin Password')"
                                         placeholder="***************"
                                         v-model.trim="PAPERLESS_ADMIN_PASSWORD"
                                         class="mg-bottom"
