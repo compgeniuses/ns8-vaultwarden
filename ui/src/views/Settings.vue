@@ -30,13 +30,22 @@
             >
             </cv-text-input>
             <cv-text-input
+              :label="$t('settings.paperless_admin')"
+              placeholder="paperlessadmin"
+              v-model.trim="PAPERLESS_ADMIN_USER"
+              class="mg-bottom"
+              :invalid-message="$t(error.host)"
+              :disabled="loading.getConfiguration || loading.configureModule"
+              ref="PAPERLESS_ADMIN_USER"
+            >
+            <cv-text-input
               :label="$t('settings.paperless_admin_password')"
-              placeholder="paperless.example.org"
+              placeholder="P@perle5$"
               v-model.trim="PAPERLESS_ADMIN_PASSWORD"
               class="mg-bottom"
               :invalid-message="$t(error.host)"
               :disabled="loading.getConfiguration || loading.configureModule"
-              ref="PAPERLESS_ADMIN_PASSWOR"
+              ref="PAPERLESS_ADMIN_PASSWORD"
             >
             </cv-text-input>
             <cv-toggle
@@ -191,6 +200,7 @@ export default {
     getConfigurationCompleted(taskContext, taskResult) {
       const config = taskResult.output;
       this.host = config.host;
+      this.PAPERLESS_ADMIN_USER = config.PAPERLESS_ADMIN_USER;
       this.PAPERLESS_ADMIN_PASSWORD = config.PAPERLESS_ADMIN_PASSWORD;
       this.isLetsEncryptEnabled = config.lets_encrypt;
       this.isHttpToHttpsEnabled = config.http2https;
@@ -207,6 +217,14 @@ export default {
 
         if (isValidationOk) {
           this.focusElement("host");
+        }
+        isValidationOk = false;
+      }
+      if (!this.PAPERLESS_ADMIN_USER) {
+        this.error.PAPERLESS_ADMIN_USER = "common.required";
+
+        if (isValidationOk) {
+          this.focusElement("PAPERLESS_ADMIN_USER");
         }
         isValidationOk = false;
       }

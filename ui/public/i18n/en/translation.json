@@ -18,10 +18,15 @@
     "mount": "Mount",
     "no_services": "No services",
     "no_images": "No images",
-    "no_volumes": "No volumes"
+    "no_volumes": "No volumes",
+    "status.paperless_url": "Paperless URL",
+    "status.open_paperless_page": "Go to Paperless"
   },
   "settings": {
     "title": "Settings",
+    "settings.paperless_fqdn": "Paperless FQDN",
+    "settings.paperless_admin": "Paperless Admin",
+    "settings.paperless_admin_password": "Paperless admin password",
     "configure_instance": "Configure {instance}",
     "save": "Save",
     "test_field": "Test field"
