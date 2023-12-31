@@ -38,7 +38,7 @@
               :disabled="loading.getConfiguration || loading.configureModule"
               ref="PAPERLESS_ADMIN_USER"
             >
-          </cv-text-input>
+            </cv-text-input>
             <cv-text-input
               :label="$t('settings.paperless_admin_password')"
               placeholder="P@perle5$"
@@ -125,6 +125,8 @@ export default {
       },
       urlCheckInterval: null,
       host: "",
+      PAPERLESS_ADMIN_USER: "",
+      PAPERLESS_ADMIN_PASSWORD: "",
       isLetsEncryptEnabled: false,
       isHttpToHttpsEnabled: false,
       loading: {
@@ -135,6 +137,8 @@ export default {
         getConfiguration: "",
         configureModule: "",
         host: "",
+        PAPERLESS_ADMIN_USER: "",
+        PAPERLESS_ADMIN_PASSWORD: "",
         lets_encrypt: "",
         http2https: "",
       },
@@ -291,6 +295,8 @@ export default {
           action: taskAction,
           data: {
             host: this.host,
+            PAPERLESS_ADMIN_USER: this.PAPERLESS_ADMIN_USER,
+            PAPERLESS_ADMIN_PASSWORD: this.PAPERLESS_ADMIN_PASSWORD,
             lets_encrypt: this.isLetsEncryptEnabled,
             http2https: this.isHttpToHttpsEnabled,
           },
