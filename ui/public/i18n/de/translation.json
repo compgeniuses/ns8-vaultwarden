@@ -17,6 +17,10 @@
         "paperless_admin_password": "Paperless admin password",
         "test_field": "Testfeld",
         "configure_instance": "Konfiguriere {instance}",
+        "lets_encrypt": "Lets Encrypt",
+        "disabled": "Disabled",
+        "enabled": "Enabled",
+        "http_to_https": "http2https",
         "save": "Speichern",
         "title": "Einstellungen"
     },
