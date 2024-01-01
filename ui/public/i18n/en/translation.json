@@ -28,6 +28,10 @@
     "paperless_admin": "Paperless Admin",
     "paperless_admin_password": "Paperless admin password",
     "configure_instance": "Configure {instance}",
+    "lets_encrypt": "Lets Encrypt",
+    "disabled": "Disabled",
+    "enabled": "Enabled",
+    "http_to_https": "http2https",
     "save": "Save",
     "test_field": "Test field"
   },

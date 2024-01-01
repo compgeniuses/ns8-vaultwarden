@@ -29,6 +29,10 @@
         "save": "Salva",
         "title": "Impostazioni",
         "configure_instance": "Configura {instance}",
+        "lets_encrypt": "Lets Encrypt",
+        "disabled": "Disabled",
+        "enabled": "Enabled",
+        "http_to_https": "http2https",
         "test_field": "Campo di test"
     },
     "error": {
