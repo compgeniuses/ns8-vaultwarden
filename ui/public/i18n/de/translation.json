@@ -12,9 +12,9 @@
         "validation_error": "Überprüfungsfehler"
     },
     "settings": {
-        "settings.paperless_fqdn": "Paperless FQDN",
-        "settings.paperless_admin": "Paperless Admin",
-        "settings.paperless_admin_password": "Paperless admin password",
+        "paperless_fqdn": "Paperless FQDN",
+        "paperless_admin": "Paperless Admin",
+        "paperless_admin_password": "Paperless admin password",
         "test_field": "Testfeld",
         "configure_instance": "Konfiguriere {instance}",
         "save": "Speichern",
@@ -40,8 +40,8 @@
         "installation_node": "Installations-Knoten",
         "node": "Knoten",
         "no_volumes": "keine Volumen",
-        "status.paperless_url": "Paperless URL",
-        "status.open_paperless_page": "Go to Paperless"
+        "paperless_url": "Paperless URL",
+        "open_paperless_page": "Go to Paperless"
     },
     "about": {
         "title": "Über"

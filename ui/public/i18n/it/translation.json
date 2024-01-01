@@ -19,13 +19,13 @@
         "app_volumes": "Volume app|Volumi app",
         "installation_node": "Nodo",
         "mount": "Percorso di mount",
-        "status.paperless_url": "Paperless URL",
-        "status.open_paperless_page": "Go to Paperless"
+        "paperless_url": "Paperless URL",
+        "open_paperless_page": "Go to Paperless"
     },
     "settings": {
-        "settings.paperless_fqdn": "Paperless FQDN",
-        "settings.paperless_admin": "Paperless Admin",
-        "settings.paperless_admin_password": "Paperless admin password",
+        "paperless_fqdn": "Paperless FQDN",
+        "paperless_admin": "Paperless Admin",
+        "paperless_admin_password": "Paperless admin password",
         "save": "Salva",
         "title": "Impostazioni",
         "configure_instance": "Configura {instance}",
