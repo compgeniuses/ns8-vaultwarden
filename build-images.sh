@@ -14,7 +14,7 @@ images=()
 repobase="${REPOBASE:-ghcr.io/compgeniuses}"
 # Configure the image name
 reponame="paperlessngx"
-paperless_version="2.2.1"
+paperless_version="2.3.1"
 
 # Create a new empty container image
 container=$(buildah from scratch)
