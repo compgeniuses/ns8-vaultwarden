@@ -24,10 +24,11 @@ ExecStartPre=/usr/bin/podman pod create --infra-conmon-pidfile %t/vaultwarden.pi
     --cidfile=%t/vaultwarden.ctr-id \
     --cgroups=no-conmon \
     --replace --name vaultwarden \
-    --pod-id-file %t/vaultwarden.pod-id \   
-    --env-file=%S/state/environment 
-    --publish 127.0.0.1:${TCP_PORT}:9300 \
-    --env=vaultwarden* \
+    --pod-id-file %t/vaultwarden.pod-id \  
+    --publish 127.0.0.1:${TCP_PORT}:8080 \ 
+    --env-file=%S/state/environment \
+    --env-file=smarthost.env \
+    --env=vaultwarden_* \
     --env=SMTP_HOST={SMTP_HOST} \
     --env=SMTP_FROM={SMTP_FROM} \
     --env=SMTP_FROM_NAME=${SMTP_FROM_NAME} \
@@ -36,7 +37,6 @@ ExecStartPre=/usr/bin/podman pod create --infra-conmon-pidfile %t/vaultwarden.pi
     --env=SMTP_USERNAME=${SMTP_USERNAME} \
     --env=SMTP_PASSWORD=${SMTP_PASSWORD} \
     --env=SMTP_AUTH_MECHANISM=${SMTP_AUTH_MECHANISM} \
-    --env-file=smarthost.env \
     --volume=vaultwarden-data:/data/ \
     ${SERVER_IMAGE}
 ExecStart=/usr/bin/podman pod start --pod-id-file %t/vaultwarden.pod-id
