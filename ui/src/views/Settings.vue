@@ -31,7 +31,7 @@
             </cv-text-input>
             <cv-text-input
               :label="$t('settings.admin_token')"
-              placeholder="P@perle5$"
+              placeholder="GjJH4GgJ5g475HFj87GJJgh"
               v-model="ADMIN_TOKEN"
               class="mg-bottom"
               :invalid-message="$t(error.ADMIN_TOKEN)"
