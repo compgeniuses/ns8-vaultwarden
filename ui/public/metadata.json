@@ -1,7 +1,7 @@
 {
-  "name": "paperless",
+  "name": "VAultwarden",
   "description": {
-    "en": "Paperless-ngx is a community-supported open-source document management system that transforms your physical documents into a searchable online archive so you can keep, well, less paper."
+    "en": "lternative implementation of the Bitwarden server API written in Rust and compatible with upstream Bitwarden clients*, perfect for self-hosted deployment where running the official resource-heavy service might not be ideal.."
   },
   "categories": ["collaboration"],
   "authors": [
@@ -11,9 +11,9 @@
     }
   ],
   "docs": {
-    "documentation_url": "https://docs.kickstart.com/",
-    "bug_url": "https://github.com/compgeniuses/ns8-paperless-ngx",
-    "code_url": "https://github.com/compgeniuses/ns8-paperless-ngx"
+    "documentation_url": "https://github.com/dani-garcia/vaultwarden/wiki",
+    "bug_url": "https://github.com/compgeniuses/ns8-vaultwarden",
+    "code_url": "https://github.com/compgeniuses/ns8-vaultwarden"
   },
-  "source": "ghcr.io/compgeniuses/ns8-paperless-ngx"
+  "source": "ghcr.io/compgeniuses/ns8-vaultwarden"
 }

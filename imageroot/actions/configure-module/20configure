@@ -12,62 +12,44 @@ import agent
 
 data = json.load(sys.stdin)
 
-# Setup default values
-paperless_name = data.get("paperless_name","paperless-ngx")
-PAPERLESS_ADMIN_USER = data.get("PAPERLESS_ADMIN_USER","paperlessadmin")
-PAPERLESS_ADMIN_PASSWORD = data.get("PAPERLESS_ADMIN_PASSWORD","P@perle5$")
-PAPERLESS_ADMIN_MAIL = data.get("PAPERLESS_ADMIN_MAIL","")
-PAPERLESS_TIME_ZONE = data.get("PAPERLESS_TIME_ZONE","America/Los_Angeles")
-PAPERLESS_OCR_LANGUAGE = data.get("PAPERLESS_OCR_LANGUAGE","eng")
-PAPERLESS_COOKIE_PREFIX = data.get("PAPERLESS_COOKIE_PREFIX","paperlessngx")
-PAPERLESS_FILENAME_FORMAT = data.get("PAPERLESS_FILENAME_FORMAT","{created_year}/{correspondent}/{doc_pk}-{title}")
 
-# PAperless CSRF settings
+# vaultwarden domain settings
 host = data.get("host", "")
-PAPERLESS_URL = "https://"+host
+DOMAIN = "https://"+host
 
 
-# Db Config
-
-POSTGRES_DB = data.get("POSTGRES_DB","paperless")
-POSTGRES_USER = data.get("POSTGRES_USER","paperless")
-POSTGRES_PASSWORD = data.get("POSTGRES_PASSWORD","p@perle$$")
-
-db_config = {
-    
-    "POSTGRES_ROOT_HOST": "localhost",
-    "POSTGRES_DATABASE": POSTGRES_DB,
-    "POSTGRES_USER": POSTGRES_USER,
-    "POSTGRES_PASSWORD": POSTGRES_PASSWORD,
-    
-}
-agent.write_envfile('database.env', db_config)
-
-# Talk with agent using file descriptor.
+# load configs values
+DOMAIN = data.get("DOMAIN","")
+SENDS_ALLOWED = data.get("SENDS_ALLOWED","true")
+EMERGENCY_ACCESS_ALLOWED = data.get("EMERGENCY_ACCESS_ALLOWED","true")
+WEB_VAULT_ENABLED = data.get("WEB_VAULT_ENABLED","true")
+SIGNUPS_ALLOWED = data.get("SIGNUPS_ALLOWED","false")
+SIGNUPS_VERIFY = data.get(" SIGNUPS_VERIFY","true")
+SIGNUPS_VERIFY_RESEND_TIME = data.get("SIGNUPS_VERIFY_RESEND_TIME","3600")
+SIGNUPS_VERIFY_RESEND_LIMIT = data.get("SIGNUPS_VERIFY_RESEND_LIMIT","5")
+SIGNUPS_DOMAINS_WHITELIST = data.get("SIGNUPS_DOMAINS_WHITELIST","vualtdomain.org,vaultdomain2.org")
 
 # Setup configuration from user input.
-agent.set_env("PAPERLESS_NGX_NAME", paperless_name)
-agent.set_env("PAPERLESS_TIME_ZONE", PAPERLESS_TIME_ZONE)
-agent.set_env("PAPERLESS_OCR_LANGUAGE", PAPERLESS_OCR_LANGUAGE)
-agent.set_env("PAPERLESS_COOKIE_PREFIX", PAPERLESS_COOKIE_PREFIX)
-agent.set_env("PAPERLESS_ADMIN_USER", PAPERLESS_ADMIN_USER)
-agent.set_env("PAPERLESS_ADMIN_PASSWORD", PAPERLESS_ADMIN_PASSWORD)
-agent.set_env("PAPERLESS_ADMIN_MAIL", PAPERLESS_ADMIN_MAIL)
-agent.set_env("PAPERLESS_FILENAME_FORMAT", PAPERLESS_FILENAME_FORMAT)
+agent.set_env("DOMAIN", DOMAIN)
+agent.set_env("SENDS_ALLOWED", SENDS_ALLOWED)
+agent.set_env("EMERGENCY_ACCESS_ALLOWED", EMERGENCY_ACCESS_ALLOWED)
+agent.set_env("WEB_VAULT_ENABLED", WEB_VAULT_ENABLED)
+agent.set_env("SIGNUPS_ALLOWED", SIGNUPS_ALLOWED)
+agent.set_env("SIGNUPS_VERIFY", SIGNUPS_VERIFY)
+agent.set_env("SIGNUPS_VERIFY_RESEND_TIME", SIGNUPS_VERIFY_RESEND_TIME)
+agent.set_env("SIGNUPS_VERIFY_RESEND_LIMIT", SIGNUPS_VERIFY_RESEND_LIMIT)
+agent.set_env("SIGNUPS_DOMAINS_WHITELIST", SIGNUPS_DOMAINS_WHITELIST)
 
-#paperless CSRF settings
-agent.set_env("PAPERLESS_URL", PAPERLESS_URL)
-
-# Setup tika and gotenberg configuration from user input.
-agent.set_env("PAPERLESS_TIKA_ENABLED", "1")
-agent.set_env("PAPERLESS_TIKA_GOTENBERG_ENDPOINT", "http://127.0.0.1:3000")
-agent.set_env("PAPERLESS_TIKA_ENDPOINT", "http://127.0.0.1:9998")
 
 # Setup PHP with safe defaults
 agent.set_env("PHP_ENABLE_OPCACHE", "1")
 agent.set_env("PHP_MEMORY_LIMIT", "512M")
-# Configure Traefik to route "/paperlessngx" path requests to the paperlessngx service
 
+# other defaults
+agent.set_env("LOGIN_RATELIMIT_MAX_BURST", "10")
+agent.set_env("LOGIN_RATELIMIT_SECONDS", "60")
+agent.set_env("ADMIN_RATELIMIT_MAX_BURST", "10")
+agent.set_env("ADMIN_RATELIMIT_SECONDS", "60")
 
 # Make sure everything is saved inside the environment file
 # just before starting systemd unit

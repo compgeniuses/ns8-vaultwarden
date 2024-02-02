@@ -15,11 +15,12 @@ data = json.load(sys.stdin)
 
 # Setup default values
 random_key = secrets.token_hex(16)
-PAPERLESS_SECRET_KEY = data.get("PAPERLESS_SECRET_KEY",random_key)
+ADMIN_TOKEN = data.get("ADMIN_TOKEN",random_key)
 
 # Talk with agent using file descriptor.
 
-agent.set_env("PAPERLESS_SECRET_KEY", PAPERLESS_SECRET_KEY)
+agent.set_env("ADMIN_TOKEN", ADMIN_TOKEN)
+
 
 # Make sure everything is saved inside the environment file
 # just before starting systemd unit

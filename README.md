@@ -1,68 +1,81 @@
-# ns8-paperless ngx
-Paperless-ngx is a community-supported open-source document management system that transforms your physical documents into a searchable online archive so you can keep, well, less paper.
+# ns8-vaultwarden
+vaultwarden is a community-supported open-source document management system that transforms your physical documents into a searchable online archive so you can keep, well, less paper.
 
 ## Install
 
 Instantiate the module with:
 
-    add-module ghcr.io/compgeniuses/paperlessngx:latest 1
+    add-module ghcr.io/compgeniuses/vaultwarden:latest 1
 
 The output of the command will return the instance name.
 Output example:
 
-    {"module_id": "paperlessngx", "image_name": "paperlessngx", "image_url": "ghcr.io/compgeniuses/paperlessngx:latest"}
+    {"module_id": "vaultwarden", "image_name": "vaultwarden", "image_url": "ghcr.io/compgeniuses/vaultwarden:latest"}
 
 ## Configure
 
-Let's assume that the paperless instance is named `paperlessngx1`.
+Let's assume that the vaultwarden instance is named `vaultwarden1`.
 
 Launch `configure-module`, by setting the following parameters:
 
-- `paperless_name`: the name given to the instance that wil also appear as the name on the dachboard
-- `PAPERLESS_TIME_ZONE`: the timezone for the project, a config that can be modified
-- `PAPERLESS_TIME_ZONE`: the default is America/Los_Angeles
-- `PAPERLESS_ADMIN_USER`: define the default username and password for superadmin: set to = paperlessadmin
-- `PAPERLESS_ADMIN_PASSWORD`: Define the Default password Set to = P@perle5$
+- `LOGIN_RATELIMIT_MAX_BURST`: 10
+- `LOGIN_RATELIMIT_SECONDS`: 60
+- `ADMIN_RATELIMIT_MAX_BURST`: 10
+- `ADMIN_RATELIMIT_SECONDS`: 60
+- `ADMIN_TOKEN`: YourReallyStrongAdminTokenHere
+- `SENDS_ALLOWED`: true
+- `EMERGENCY_ACCESS_ALLOWED`: true
+- `WEB_VAULT_ENABLED`: true
+- `SIGNUPS_ALLOWED`: false
+- `SIGNUPS_VERIFY`: true
+- `SIGNUPS_VERIFY_RESEND_TIME`: 3600
+- `SIGNUPS_VERIFY_RESEND_LIMIT`: 5
+- `SIGNUPS_DOMAINS_WHITELIST`: yourdomainhere.com,anotherdomain.com
+- `SMTP_HOST`: smtp.youremaildomain.com
+- `SMTP_FROM`: vaultwarden@youremaildomain.com
+- `SMTP_FROM_NAME`: Vaultwarden
+- `SMTP_SECURITY`: SECURITYMETHOD
+- `SMTP_PORT`: XXXX
+- `SMTP_USERNAME`: vaultwarden@youremaildomain.com
+- `SMTP_PASSWORD`: YourReallyStrongPasswordHere
+- `SMTP_AUTH_MECHANISM`: "Mechanism"
 - `lets_encrypt`: Set LEtsecnrypt to True or False, Default is FALSE
 - `http2https`: set redirect to True or False, Default is True
-- `host`: the traefik host url for the project
+- `host`: the traefik host url for the will be DOMAIN=https://vaultwarden.yourdomain.com
 
 - ...
 
 Example:
 
-    api-cli run module/paperlessngx1/configure-module --data '{"host": "paperlessngx.domain.com"}'
+    api-cli run module/vaultwarden1/configure-module --data '{"host": "vaultwarden.domain.com"}'
 
     or if modifying another value: 
 
-    api-cli run module/paperlessngx5/configure-module --data '{"host": "paperlessngx.domain.com","paperless_name": "MyPaperless NGX"}'
+    api-cli run module/vaultwarden5/configure-module --data '{"host": "vaultwarden.domain.com","vaultwarden_name": "Myvaultwarden"}'
 
-    api-cli run module/paperlessngx1/configure-module --data '{
-        "host": "papperlessngx.rocky9-pve2.org",
+    api-cli run module/vaultwarden1/configure-module --data '{
+        "host": "papperles.rocky9-pve2.org",
         "lets_encrypt": false,
         "http2https": true,
-        "paperless_name": "paperless-ngx",
-        "PAPERLESS_ADMIN_PASSWORD": "P@perle5$",
-        "PAPERLESS_ADMIN_USER":"paperlessadmin",
-        "PAPERLESS_ADMIN_MAIL":"foo@domain.com",
-        "PAPERLESS_TIME_ZONE":"America/Los_Angeles",
-        "PAPERLESS_OCR_LANGUAGE":"eng",
-        "PAPERLESS_COOKIE_PREFIX":"paperlessngx"
+        "WEB_VAULT_ENABLED": true,
+        "SIGNUPS_ALLOWED": fales,
+        "SIGNUPS_DOMAINS_WHITELIST":"yourdomainhere.com,anotherdomain.com",
+        "ADMIN_TOKEN":"YourReallyStrongAdminTokenHere"
     }'
 
 
 The above command will:
-- start and configure the paperlessngx instance
+- start and configure the vaultwarden instance
 - (describe configuration process)
 - ...
 
 Additional Parameters are Described here:
-https://docs.paperless-ngx.com/configuration/#hosting-security
+https://github.com/dani-garcia/vaultwarden/wiki
 WHile they have not been Implemented, if you require more parameters to be defined, kindly free to raise an issue, and define why and how that parameter should be implemented for use
 
-Send a test HTTP request to the ns8-paperless-ngx backend service:
+Send a test HTTP request to the vaultwarden backend service:
 
-    curl http://127.0.0.1/paperlessngx/
+    curl http://127.0.0.1/vaultwarden/
 
 ## Smarthost setting discovery
 
@@ -74,11 +87,11 @@ setup](https://nethserver.github.io/ns8-core/core/smarthost/) every time
 kickstart starts, the command `bin/discover-smarthost` runs and refreshes
 the `state/smarthost.env` file with fresh values from Redis.
 
-Furthermore if smarthost setup is changed when ns8-paperless-ngx is already
+Furthermore if smarthost setup is changed when vaultwarden is already
 running, the event handler `events/smarthost-changed/10reload_services`
 restarts the main module service.
 
-See also the `systemd/user/paperless-server.service` file.
+See also the `systemd/user/vaultwarden-server.service` file.
 
 This setting discovery is just an example to understand how the module is
 expected to work: it can be rewritten or discarded completely.
@@ -87,14 +100,14 @@ expected to work: it can be rewritten or discarded completely.
 
 To uninstall the instance:
 
-    remove-module --no-preserve paperlessngx1
+    remove-module --no-preserve vaultwarden1
 
 ## Testing
 
 Test the module using the `test-module.sh` script:
 
 
-    ./test-module.sh <NODE_ADDR> ghcr.io/nethserver/ns8-paperless-ngx:latest
+    ./test-module.sh <NODE_ADDR> ghcr.io/nethserver/vaultwarden:latest
 
 The tests are made using [Robot Framework](https://robotframework.org/)
 
@@ -108,8 +121,19 @@ To setup the translation process:
 - add your repository to [hosted.weblate.org]((https://hosted.weblate.org) or ask a NethServer developer to add it to ns8 Weblate project
 
 ## To Do
-[Optional Services:](https://docs.paperless-ngx.com/configuration/#optional-services)
-- Understand and Implement [Apache Tika](https://tika.apache.org/) to your repository
-- Understand and Implement Docker  [gotenberg](https://gotenberg.dev/) to your repository
 
-Paperless can make use of Tika and Gotenberg for parsing and converting "Office" documents (such as ".doc", ".xlsx" and ".odt"). Tika and Gotenberg are also needed to allow parsing of E-Mails (.eml).
+Implement Ldap Sync using these modules
+https://hub.docker.com/r/vividboarder/vaultwarden_ldap
+
+it includes alot of parameters
+
+if not implemented we could use this
+
+https://github.com/bitwarden/directory-connector
+
+this docker image seems to pre-implement SSO https://github.com/Timshel/vaultwarden/pkgs/container/vaultwarden
+
+Also this pre-implemnts SSO: https://hub.docker.com/r/oidcwarden/vaultwarden-oidc/tags
+
+SSO PR seemed to be in the worsk here as well: https://github.com/dani-garcia/vaultwarden/pull/3899
+so would be rebased, once its ready

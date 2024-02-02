@@ -13,23 +13,23 @@ images=()
 # The image will be pushed to GitHub container registry
 repobase="${REPOBASE:-ghcr.io/compgeniuses}"
 # Configure the image name
-reponame="paperlessngx"
-paperless_version="2.4.2"
+reponame="vaultwarden"
+vaultwarden_version="latest"
 
 # Create a new empty container image
 container=$(buildah from scratch)
 
 # Reuse existing nodebuilder-kickstart container, to speed up builds
-if ! buildah containers --format "{{.ContainerName}}" | grep -q nodebuilder-ns8-paperlessngx; then
+if ! buildah containers --format "{{.ContainerName}}" | grep -q nodebuilder-vaultwarden; then
     echo "Pulling NodeJS runtime..."
-    buildah from --name nodebuilder-ns8-paperlessngx -v "${PWD}:/usr/src:Z" docker.io/library/node:lts
+    buildah from --name nodebuilder-vaultwarden -v "${PWD}:/usr/src:Z" docker.io/library/node:lts
 fi
 
 echo "Build static UI files with node..."
 buildah run \
     --workingdir=/usr/src/ui \
     --env="NODE_OPTIONS=--openssl-legacy-provider" \
-    nodebuilder-ns8-paperlessngx \
+    nodebuilder-vaultwarden \
     sh -c "yarn install && yarn build"
 
 # Add imageroot directory to the container image
@@ -40,7 +40,7 @@ buildah config --entrypoint=/ \
     --label="org.nethserver.authorizations=traefik@node:routeadm" \
     --label="org.nethserver.tcp-ports-demand=1" \
     --label="org.nethserver.rootfull=0" \
-    --label="org.nethserver.images=docker.io/library/redis:7.2.3-bookworm docker.io/library/postgres:15.5-bookworm docker.io/paperlessngx/paperless-ngx:${paperless_version} ghcr.io/paperless-ngx/tika:2.9.0-full docker.io/gotenberg/gotenberg:7.10.2" \
+    --label="org.nethserver.images=docker.io/vaultwarden/server:${vaultwarden_version}" \
     --label="org.nethserver.tcp-ports-demand=1" \
     "${container}"
 # Commit the image

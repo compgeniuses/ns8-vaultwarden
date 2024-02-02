@@ -16,13 +16,26 @@ config = {}
 config["host"] = os.getenv("TRAEFIK_HOST","")
 config["http2https"] = os.getenv("TRAEFIK_HTTP2HTTPS") == "True"
 config["lets_encrypt"] = os.getenv("TRAEFIK_LETS_ENCRYPT") == "True"
-config["paperless_name"] = os.getenv("PAPERLESS_NGX_NAME","")
-config["PAPERLESS_TIME_ZONE"] = os.getenv("PAPERLESS_TIME_ZONE","")
-config["PAPERLESS_OCR_LANGUAGE"] = os.getenv("PAPERLESS_OCR_LANGUAGE","")
-config["PAPERLESS_ADMIN_USER"] = os.getenv("PAPERLESS_ADMIN_USER","")
-config["PAPERLESS_ADMIN_PASSWORD"] = os.getenv("PAPERLESS_ADMIN_PASSWORD","")
-config["PAPERLESS_ADMIN_MAIL"] = os.getenv("PAPERLESS_ADMIN_MAIL","")
-config["PAPERLESS_COOKIE_PREFIX"] = os.getenv("PAPERLESS_COOKIE_PREFIX","")
-config["PAPERLESS_FILENAME_FORMAT"] = os.getenv("PAPERLESS_FILENAME_FORMAT","")
+config["LOGIN_RATELIMIT_MAX_BURST"] = os.getenv("LOGIN_RATELIMIT_MAX_BURS","10")
+config["LOGIN_RATELIMIT_SECONDS"] = os.getenv("LOGIN_RATELIMIT_SECONDS","")
+config["ADMIN_RATELIMIT_MAX_BURST"] = os.getenv("ADMIN_RATELIMIT_MAX_BURST","")
+config["ADMIN_RATELIMIT_SECONDS"] = os.getenv("ADMIN_RATELIMIT_SECONDS","")
+config["SENDS_ALLOWED"] = os.getenv("SENDS_ALLOWED","")
+config["EMERGENCY_ACCESS_ALLOWED"] = os.getenv("EMERGENCY_ACCESS_ALLOWED","")
+config["WEB_VAULT_ENABLED"] = os.getenv("WEB_VAULT_ENABLED") == "true"
+config["SIGNUPS_ALLOWED"] = os.getenv("SIGNUPS_ALLOWED") == "false"
+config["SIGNUPS_VERIFY"] = os.getenv("SIGNUPS_VERIFY") == "false"
+config["SIGNUPS_VERIFY_RESEND_TIME"] = os.getenv("SIGNUPS_VERIFY_RESEND_TIME","")
+config["SIGNUPS_VERIFY_RESEND_LIMIT"] = os.getenv("SIGNUPS_VERIFY_RESEND_LIMIT","")
+config["SIGNUPS_DOMAINS_WHITELIST"] = os.getenv("SIGNUPS_DOMAINS_WHITELIST","")
+config["SMTP_HOST"] = os.getenv("SMTP_HOST","")
+config["SMTP_FROM"] = os.getenv("SMTP_FROM","")
+config["SMTP_FROM_NAME"] = os.getenv("SMTP_FROM_NAME","")
+config["SMTP_SECURITY"] = os.getenv("SMTP_SECURITY","")
+config["SMTP_PORT"] = os.getenv("SMTP_PORT","")
+config["SMTP_USERNAME"] = os.getenv("SMTP_USERNAM","")
+config["SMTP_PASSWORD"] = os.getenv("SMTP_PASSWORD","")
+config["SMTP_AUTH_MECHANISM"] = os.getenv("SMTP_AUTH_MECHANISM","")
+
 
 json.dump(config, fp=sys.stdout)

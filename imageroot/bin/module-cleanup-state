@@ -5,4 +5,4 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
-rm -vf paperless.pg_dump
+# rm -vf vaultwarden.pg_dump

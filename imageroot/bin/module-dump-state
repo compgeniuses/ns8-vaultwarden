@@ -5,7 +5,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 
-set -e
+#set -e
 
-echo "Dumping paperless postgres database"
-podman exec paperless-pgsql pg_dump -U paperless --format=c  paperless > paperless.pg_dump
+# echo "Dumping vaultwarden postgres database"
+# podman exec vaultwarden-pgsql pg_dump -U vaultwarden --format=c  vaultwarden > vaultwarden.pg_dump
