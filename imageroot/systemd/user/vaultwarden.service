@@ -9,25 +9,40 @@
 #
 
 [Unit]
-Description=Podman vaultwarden.service
-Requires=vaultwarden-server.service
-Before=vaultwarden-server.service
+Description=vaultwarden Instance
+
 
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n
 EnvironmentFile=-%S/state/environment
 Restart=always
 TimeoutStopSec=70
-ExecStartPre=/bin/rm -f %t/vaultwarden-pod.pid %t/ns8-vaultwarden.pod-id
-ExecStartPre=/usr/bin/podman pod create --infra-conmon-pidfile %t/vaultwarden-pod.pid \
-    --pod-id-file %t/ns8-vaultwarden.pod-id \
-    --name vaultwarden \
+ExecStartPre=/bin/rm -f %t/vaultwarden.pid %t/vaultwarden.pod-id
+ExecStartPre=-runagent discover-smarthost
+ExecStartPre=/usr/bin/podman pod create --infra-conmon-pidfile %t/vaultwarden.pid 
+    --conmon-pidfile=%t/vaultwarden.pid \
+    --cidfile=%t/vaultwarden.ctr-id \
+    --cgroups=no-conmon \
+    --replace --name vaultwarden \
+    --pod-id-file %t/vaultwarden.pod-id \   
+    --env-file=%S/state/environment 
     --publish 127.0.0.1:${TCP_PORT}:9300 \
-    --replace
-ExecStart=/usr/bin/podman pod start --pod-id-file %t/ns8-vaultwarden.pod-id
-ExecStop=/usr/bin/podman pod stop --ignore --pod-id-file %t/ns8-vaultwarden.pod-id -t 10
-ExecStopPost=/usr/bin/podman pod rm --ignore -f --pod-id-file %t/ns8-vaultwarden.pod-id
-PIDFile=%t/vaultwarden-pod.pid
+    --env=vaultwarden* \
+    --env=SMTP_HOST={SMTP_HOST} \
+    --env=SMTP_FROM={SMTP_FROM} \
+    --env=SMTP_FROM_NAME=${SMTP_FROM_NAME} \
+    --env=SMTP_SECURITY=${SMTP_ENCRYPTION} \
+    --env=SMTP_PORT=${SMTP_PORT} \
+    --env=SMTP_USERNAME=${SMTP_USERNAME} \
+    --env=SMTP_PASSWORD=${SMTP_PASSWORD} \
+    --env=SMTP_AUTH_MECHANISM=${SMTP_AUTH_MECHANISM} \
+    --env-file=smarthost.env \
+    --volume=vaultwarden-data:/data/ \
+    ${SERVER_IMAGE}
+ExecStart=/usr/bin/podman pod start --pod-id-file %t/vaultwarden.pod-id
+ExecStop=/usr/bin/podman pod stop --ignore --pod-id-file %t/vaultwarden.pod-id -t 10
+ExecStopPost=/usr/bin/podman pod rm --ignore -f --pod-id-file %t/vaultwarden.pod-id
+PIDFile=%t/vaultwarden.pid
 Type=forking
 
 [Install]
