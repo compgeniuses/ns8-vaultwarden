@@ -22,9 +22,9 @@ config["ADMIN_RATELIMIT_MAX_BURST"] = os.getenv("ADMIN_RATELIMIT_MAX_BURST","")
 config["ADMIN_RATELIMIT_SECONDS"] = os.getenv("ADMIN_RATELIMIT_SECONDS","")
 config["SENDS_ALLOWED"] = os.getenv("SENDS_ALLOWED","")
 config["EMERGENCY_ACCESS_ALLOWED"] = os.getenv("EMERGENCY_ACCESS_ALLOWED","")
-config["WEB_VAULT_ENABLED"] = os.getenv("WEB_VAULT_ENABLED") == "true"
-config["SIGNUPS_ALLOWED"] = os.getenv("SIGNUPS_ALLOWED") == "false"
-config["SIGNUPS_VERIFY"] = os.getenv("SIGNUPS_VERIFY") == "false"
+config["WEB_VAULT_ENABLED"] = os.getenv("WEB_VAULT_ENABLED") == "True"
+config["SIGNUPS_ALLOWED"] = os.getenv("SIGNUPS_ALLOWED") == "False"
+config["SIGNUPS_VERIFY"] = os.getenv("SIGNUPS_VERIFY") == "False"
 config["SIGNUPS_VERIFY_RESEND_TIME"] = os.getenv("SIGNUPS_VERIFY_RESEND_TIME","")
 config["SIGNUPS_VERIFY_RESEND_LIMIT"] = os.getenv("SIGNUPS_VERIFY_RESEND_LIMIT","")
 config["SIGNUPS_DOMAINS_WHITELIST"] = os.getenv("SIGNUPS_DOMAINS_WHITELIST","")
