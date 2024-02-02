@@ -24,11 +24,11 @@
         "SIGNUPS_ALLOWED": {
             "type": "boolean"
         },
-        "IGNUPS_VERIFY": {
+        "SIGNUPS_VERIFY": {
             "type": "boolean"
         },
         "SIGNUPS_DOMAINS_WHITELIST": {
-            "type": "boolean"
+            "type": "string"
         },
         "host": {
             "type": "boolean"
