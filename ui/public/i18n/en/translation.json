@@ -19,14 +19,13 @@
     "no_services": "No services",
     "no_images": "No images",
     "no_volumes": "No volumes",
-    "paperless_url": "Paperless URL",
-    "open_paperless_page": "Go to Paperless"
+    "vaultwarden_url": "vaultwarden URL",
+    "open_vaultwarden_page": "Go to vaultwarden"
   },
   "settings": {
     "title": "Settings",
-    "paperless_fqdn": "Paperless FQDN",
-    "paperless_admin": "Paperless Admin",
-    "paperless_admin_password": "Paperless admin password",
+    "vaultwarden_fqdn": "vaultwarden FQDN",
+    "admin_token": "vaultwarden admin token",
     "configure_instance": "Configure {instance}",
     "lets_encrypt": "Lets Encrypt",
     "disabled": "Disabled",

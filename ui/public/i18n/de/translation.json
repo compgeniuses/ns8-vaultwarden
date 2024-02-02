@@ -12,9 +12,8 @@
         "validation_error": "Überprüfungsfehler"
     },
     "settings": {
-        "paperless_fqdn": "Paperless FQDN",
-        "paperless_admin": "Paperless Admin",
-        "paperless_admin_password": "Paperless admin password",
+        "vaultwarden": "Paperless FQDN",
+        "admin_token": "Paperless admin password",
         "test_field": "Testfeld",
         "configure_instance": "Konfiguriere {instance}",
         "lets_encrypt": "Lets Encrypt",

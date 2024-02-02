@@ -40,7 +40,7 @@
         <cv-column :md="4" :max="4">
           <NsInfoCard
             light
-            :title="$t('status.paperless_url')"
+            :title="$t('status.vaultwarden_url')"
             :icon="Settings32"
             :loading="loading.getStatus"
             class="min-height-card"
@@ -48,8 +48,8 @@
           <template slot="content">
             <div class="card-rows">
               <div class="card-row">
-                <NsButton kind="ghost" :icon="Launch20" @click="goToPaperless">
-                  {{ $t("status.open_paperless_page") }}
+                <NsButton kind="ghost" :icon="Launch20" @click="goToVaultwarden">
+                  {{ $t("status.open_vaultwarden_page") }}
                 </NsButton>
               </div>
             </div>
@@ -360,7 +360,7 @@ export default {
     this.getConfiguration();
   },
   methods: {
-    goToPaperless() {
+    goToVaultwarden() {
         window.open('http://' + this.host);
     },
     async getConfiguration() {
