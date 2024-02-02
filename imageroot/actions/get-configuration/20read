@@ -17,16 +17,16 @@ config["host"] = os.getenv("TRAEFIK_HOST","")
 config["http2https"] = os.getenv("TRAEFIK_HTTP2HTTPS") == "True"
 config["lets_encrypt"] = os.getenv("TRAEFIK_LETS_ENCRYPT") == "True"
 config["LOGIN_RATELIMIT_MAX_BURST"] = os.getenv("LOGIN_RATELIMIT_MAX_BURS","10")
-config["LOGIN_RATELIMIT_SECONDS"] = os.getenv("LOGIN_RATELIMIT_SECONDS","")
-config["ADMIN_RATELIMIT_MAX_BURST"] = os.getenv("ADMIN_RATELIMIT_MAX_BURST","")
-config["ADMIN_RATELIMIT_SECONDS"] = os.getenv("ADMIN_RATELIMIT_SECONDS","")
-config["SENDS_ALLOWED"] = os.getenv("SENDS_ALLOWED","")
-config["EMERGENCY_ACCESS_ALLOWED"] = os.getenv("EMERGENCY_ACCESS_ALLOWED","")
+config["LOGIN_RATELIMIT_SECONDS"] = os.getenv("LOGIN_RATELIMIT_SECONDS","60")
+config["ADMIN_RATELIMIT_MAX_BURST"] = os.getenv("ADMIN_RATELIMIT_MAX_BURST","10")
+config["ADMIN_RATELIMIT_SECONDS"] = os.getenv("ADMIN_RATELIMIT_SECONDS","60")
+config["SENDS_ALLOWED"] = os.getenv("SENDS_ALLOWED") == "True"
+config["EMERGENCY_ACCESS_ALLOWED"] = os.getenv("EMERGENCY_ACCESS_ALLOWED") == "True"
 config["WEB_VAULT_ENABLED"] = os.getenv("WEB_VAULT_ENABLED") == "True"
 config["SIGNUPS_ALLOWED"] = os.getenv("SIGNUPS_ALLOWED") == "False"
 config["SIGNUPS_VERIFY"] = os.getenv("SIGNUPS_VERIFY") == "False"
-config["SIGNUPS_VERIFY_RESEND_TIME"] = os.getenv("SIGNUPS_VERIFY_RESEND_TIME","")
-config["SIGNUPS_VERIFY_RESEND_LIMIT"] = os.getenv("SIGNUPS_VERIFY_RESEND_LIMIT","")
+config["SIGNUPS_VERIFY_RESEND_TIME"] = os.getenv("SIGNUPS_VERIFY_RESEND_TIME","3600")
+config["SIGNUPS_VERIFY_RESEND_LIMIT"] = os.getenv("SIGNUPS_VERIFY_RESEND_LIMIT","5")
 config["SIGNUPS_DOMAINS_WHITELIST"] = os.getenv("SIGNUPS_DOMAINS_WHITELIST","")
 config["SMTP_HOST"] = os.getenv("SMTP_HOST","")
 config["SMTP_FROM"] = os.getenv("SMTP_FROM","")
