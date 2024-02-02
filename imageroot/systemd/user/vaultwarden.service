@@ -17,7 +17,7 @@ Environment=PODMAN_SYSTEMD_UNIT=%n
 EnvironmentFile=-%S/state/environment
 Restart=always
 TimeoutStopSec=70
-ExecStartPre=/bin/rm -f %t/vaultwarden.pid %t/vaultwarden.pod-id
+ExecStartPre=/bin/rm -f %t/vaultwarden.pid %t/vaultwarden.ctr-id
 ExecStartPre=-runagent discover-smarthost
 ExecStartPre=/usr/bin/podman pod create --infra-conmon-pidfile %t/vaultwarden.pid \
     --conmon-pidfile=%t/vaultwarden.pid \
@@ -41,7 +41,7 @@ ExecStartPre=/usr/bin/podman pod create --infra-conmon-pidfile %t/vaultwarden.pi
     ${SERVER_IMAGE}
 ExecStart=/usr/bin/podman pod start --pod-id-file %t/vaultwarden.pod-id
 ExecStop=/usr/bin/podman pod stop --ignore --pod-id-file %t/vaultwarden.pod-id -t 10
-ExecStopPost=/usr/bin/podman pod rm --ignore -f --pod-id-file %t/vaultwarden.pod-id
+ExecStopPost=/usr/bin/podman pod rm --ignore -f --pod-id-file %t/vaultwarden.ctr-id
 PIDFile=%t/vaultwarden.pid
 Type=forking
 
