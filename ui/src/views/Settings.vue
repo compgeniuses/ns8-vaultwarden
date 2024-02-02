@@ -29,8 +29,6 @@
               ref="host"
             >
             </cv-text-input>
-
-            </cv-text-input>
             <cv-text-input
               :label="$t('settings.admin_token')"
               placeholder="P@perle5$"
