@@ -4,13 +4,13 @@
 #
 
 #
-# This systemd unit starts a n8n instance using Podman.
+# This systemd unit starts a vaultwarden instance using Podman.
 # Most parts of this file come from podman-generate-systemd.
 #
 
 [Unit]
 Description=Podman vaultwarden-app.service
-BindsTo=n8n.service
+BindsTo=vaultwarden.service
 After=vaultwarden.service
 
 [Service]
