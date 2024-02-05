@@ -31,8 +31,9 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/vaultwarden-app.pid \
     --env-file=%S/state/environment \
     --env-file=smarthost.env \
     --env=vaultwarden_* \
-    --env=SMTP_HOST={SMTP_HOST} \
-    --env=SMTP_FROM={SMTP_FROM} \
+    --env=DOMAIN=${DOMAIN} \
+    --env=SMTP_HOST=${SMTP_HOST} \
+    --env=SMTP_FROM=${SMTP_FROM} \
     --env=SMTP_FROM_NAME=${SMTP_FROM_NAME} \
     --env=SMTP_SECURITY=${SMTP_ENCRYPTION} \
     --env=SMTP_PORT=${SMTP_PORT} \
