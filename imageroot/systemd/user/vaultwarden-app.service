@@ -27,6 +27,7 @@ ExecStartPost=/usr/bin/bash -c "while ! /usr/bin/podman exec vaultwarden-app /us
 ExecStart=/usr/bin/podman run --conmon-pidfile %t/vaultwarden-app.pid \
     --cidfile %t/vaultwarden-app.ctr-id --cgroups=no-conmon \
     --pod-id-file %t/vaultwarden.pod-id --replace -d --name  vaultwarden-app \
+    --user root \
     --env=vaultwarden_* \
     --env-file=%S/state/environment \
     --env-file=smarthost.env \
