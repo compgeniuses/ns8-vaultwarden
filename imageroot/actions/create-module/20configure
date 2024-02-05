@@ -15,7 +15,7 @@ data = json.load(sys.stdin)
 
 # Setup default values
 random_key = secrets.token_hex(16)
-ADMIN_TOKEN = data.get("ADMIN_TOKEN",random_key)
+ADMIN_TOKEN = data.get("ADMIN_TOKEN","$argon2id$v=19$m=65540,t=3,p=4$NE9wcGMvYjB4bTNlRTJ0cGh3S2RYNlF0MngrVGE0bk1MWmJKMEJmeVlFRT0$fq3A5jFTYM4u16+LJkuSQdN0123y7rVfbJ4+cDwG/9I")
 
 # Talk with agent using file descriptor.
 
