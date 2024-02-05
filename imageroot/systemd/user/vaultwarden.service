@@ -9,39 +9,24 @@
 #
 
 [Unit]
-Description=vaultwarden Instance
-
+Description=Podman vaultwarden.service
+Requires=vaultwarden-app.service
+Before=vaultwarden-app.service
 
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n
 EnvironmentFile=-%S/state/environment
 Restart=always
 TimeoutStopSec=70
-ExecStartPre=/bin/rm -f %t/vaultwarden.pid %t/vaultwarden.ctr-id
-ExecStartPre=-runagent discover-smarthost
+ExecStartPre=/bin/rm -f %t/vaultwarden.pid %t/vaultwarden.pod-id
 ExecStartPre=/usr/bin/podman pod create --infra-conmon-pidfile %t/vaultwarden.pid \
-    --conmon-pidfile=%t/vaultwarden.pid \
-    --cidfile=%t/vaultwarden.ctr-id \
-    --cgroups=no-conmon \
-    --replace --name vaultwarden \
-    --pod-id-file %t/vaultwarden.pod-id \  
-    --publish 127.0.0.1:${TCP_PORT}:8080 \ 
-    --env-file=%S/state/environment \
-    --env-file=smarthost.env \
-    --env=vaultwarden_* \
-    --env=SMTP_HOST={SMTP_HOST} \
-    --env=SMTP_FROM={SMTP_FROM} \
-    --env=SMTP_FROM_NAME=${SMTP_FROM_NAME} \
-    --env=SMTP_SECURITY=${SMTP_ENCRYPTION} \
-    --env=SMTP_PORT=${SMTP_PORT} \
-    --env=SMTP_USERNAME=${SMTP_USERNAME} \
-    --env=SMTP_PASSWORD=${SMTP_PASSWORD} \
-    --env=SMTP_AUTH_MECHANISM=${SMTP_AUTH_MECHANISM} \
-    --volume=vaultwarden-data:/data/ \
-    ${SERVER_IMAGE}
+    --pod-id-file %t/vaultwarden.pod-id \
+    --name vaultwarden \
+    --publish 127.0.0.1:${TCP_PORT}:8080 \
+    --replace
 ExecStart=/usr/bin/podman pod start --pod-id-file %t/vaultwarden.pod-id
 ExecStop=/usr/bin/podman pod stop --ignore --pod-id-file %t/vaultwarden.pod-id -t 10
-ExecStopPost=/usr/bin/podman pod rm --ignore -f --pod-id-file %t/vaultwarden.ctr-id
+ExecStopPost=/usr/bin/podman pod rm --ignore -f --pod-id-file %t/vaultwarden.pod-id
 PIDFile=%t/vaultwarden.pid
 Type=forking
 
