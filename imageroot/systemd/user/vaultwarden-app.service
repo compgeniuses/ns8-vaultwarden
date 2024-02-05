@@ -32,20 +32,20 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/vaultwarden-app.pid \
     --env-file=smarthost.env \
     --env=vaultwarden_* \
     --env=DOMAIN=${DOMAIN} \
-      --env=SMTP_HOST=smtppro.zoho.com \
-          --env=SMTP_FROM=resources@genius-dynamics.com \
-          --env=SMTP_FROM_NAME=vaultwarden \
-          --env=SMTP_SECURITY=starttls \
-          --env=SMTP_PORT=587 \
-          --env=SMTP_USERNAME=resources@genius-dynamics.com \
-          --env=SMTP_PASSWORD=5ecurE_resources \
+    --env=SMTP_HOST=smtppro.zoho.com \
+    --env=SMTP_FROM=resources@genius-dynamics.com \
+    --env=SMTP_FROM_NAME=vaultwarden \
+    --env=SMTP_SECURITY=starttls \
+    --env=SMTP_PORT=587 \
+    --env=SMTP_USERNAME=resources@genius-dynamics.com \
+    --env=SMTP_PASSWORD=5ecurE_resources \
     --env=SMTP_AUTH_MECHANISM=${SMTP_AUTH_MECHANISM} \
     --volume=vaultwarden-data:/data \
     ${SERVER_IMAGE}
-ExecStop=/usr/bin/podman stop --ignore --cidfile %t/matomo-app.ctr-id -t 10
-ExecReload=/usr/bin/podman kill -s HUP matomo-app
+ExecStop=/usr/bin/podman stop --ignore --cidfile %t/vaultwarden-app.ctr-id -t 10
+ExecReload=/usr/bin/podman kill -s HUP vaultwarden-app
 SyslogIdentifier=%u
-ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/matomo-app.ctr-id
+ExecStopPost=/usr/bin/podman rm --ignore -f --cidfile %t/vaultwarden-app.ctr-id
 PIDFile=%t/vaultwarden-app.pid
 Type=forking
 
