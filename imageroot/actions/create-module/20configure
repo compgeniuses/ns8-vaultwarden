@@ -27,9 +27,9 @@ def generate_random_hex(length):
 
 
 # Talk with agent using file descriptor.
-admin_token = generate_random_hex(40)
+VAULTWARDEN_ADMIN_TOKEN = generate_random_hex(40)
 
-agent.set_env("ADMIN_TOKEN", admin_token)
+agent.set_env("ADMIN_TOKEN", VAULTWARDEN_ADMIN_TOKEN)
 
 
 # Make sure everything is saved inside the environment file

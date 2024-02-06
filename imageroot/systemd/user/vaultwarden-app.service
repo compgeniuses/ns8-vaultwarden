@@ -32,6 +32,7 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/vaultwarden-app.pid \
     --env-file=smarthost.env \
     --env=vaultwarden_* \
     --env=DOMAIN=${DOMAIN} \
+    --env=ADMIN_TOKEN=${VAULTWARDEN_ADMIN_TOKEN} \
     --env=SMTP_HOST=smtppro.zoho.com \
     --env=SMTP_FROM=resources@genius-dynamics.com \
     --env=SMTP_FROM_NAME=vaultwarden \
