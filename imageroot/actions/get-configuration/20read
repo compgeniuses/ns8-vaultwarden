@@ -36,6 +36,5 @@ config["SMTP_PORT"] = os.getenv("SMTP_PORT","")
 config["SMTP_USERNAME"] = os.getenv("SMTP_USERNAME","")
 config["SMTP_PASSWORD"] = os.getenv("SMTP_PASSWORD","")
 config["SMTP_AUTH_MECHANISM"] = os.getenv("SMTP_AUTH_MECHANISM","")
-config["ADMIN_TOKEN"] = os.getenv("ADMIN_TOKEN", VAULTWARDEN_ADMIN_TOKEN)
-
+config["VAULTWARDEN_ADMIN_TOKEN"] = os.getenv("ADMIN_TOKEN","")
 json.dump(config, fp=sys.stdout)
