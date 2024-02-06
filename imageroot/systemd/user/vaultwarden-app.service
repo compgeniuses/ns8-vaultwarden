@@ -41,6 +41,17 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/vaultwarden-app.pid \
     --env=SMTP_USERNAME=resources@genius-dynamics.com \
     --env=SMTP_PASSWORD=5ecurE_resources \
     --env=SMTP_AUTH_MECHANISM=${SMTP_AUTH_MECHANISM} \
+    --env=LOGIN_RATELIMIT_MAX_BURST=10 \
+    --env=LOGIN_RATELIMIT_SECONDS=60 \
+    --env=ADMIN_RATELIMIT_MAX_BURST=10 \
+    --env=ADMIN_RATELIMIT_SECONDS=60 \
+    --env=SENDS_ALLOWED=true \
+    --env=EMERGENCY_ACCESS_ALLOWED=true \
+    --env=WEB_VAULT_ENABLED=true \
+    --env=SIGNUPS_ALLOWED=false \
+    --env=SIGNUPS_VERIFY=true \
+    --env=SIGNUPS_VERIFY_RESEND_TIME=3600 \
+    --env=SIGNUPS_VERIFY_RESEND_LIMIT=5 \
     --volume=vaultwarden-data:/data \
     ${SERVER_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/vaultwarden-app.ctr-id -t 10
