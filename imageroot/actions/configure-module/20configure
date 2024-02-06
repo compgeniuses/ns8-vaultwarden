@@ -28,7 +28,7 @@ SIGNUPS_VERIFY = data.get("SIGNUPS_VERIFY",True)
 SIGNUPS_VERIFY_RESEND_TIME = data.get("SIGNUPS_VERIFY_RESEND_TIME","3600")
 SIGNUPS_VERIFY_RESEND_LIMIT = data.get("SIGNUPS_VERIFY_RESEND_LIMIT","5")
 SIGNUPS_DOMAINS_WHITELIST = data.get("SIGNUPS_DOMAINS_WHITELIST","vualtdomain.org,vaultdomain2.org")
-
+ADMIN_TOKEN = data.get("ADMIN_TOKEN","random_hex")
 # Setup configuration from user input.
 agent.set_env("DOMAIN", DOMAIN_HOST)
 agent.set_env("SENDS_ALLOWED", SENDS_ALLOWED)

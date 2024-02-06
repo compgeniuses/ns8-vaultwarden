@@ -3,23 +3,33 @@
 #
 # Copyright (C) 2023 Nethesis S.r.l.
 # SPDX-License-Identifier: GPL-3.0-or-later
-#
+
+# from pyargon2 import hash
 import os
 import json
 import sys
 # agent is a NethServer library which provides function to communicate with the agent
 import agent
 import secrets
+import bcrypt
+import pyargon2.hash
 
 data = json.load(sys.stdin)
 
-# Setup default values
-random_key = secrets.token_hex(16)
-ADMIN_TOKEN = data.get("ADMIN_TOKEN","$argon2id$v=19$m=65540,t=3,p=4$NE9wcGMvYjB4bTNlRTJ0cGh3S2RYNlF0MngrVGE0bk1MWmJKMEJmeVlFRT0$fq3A5jFTYM4u16+LJkuSQdN0123y7rVfbJ4+cDwG/9I")
+# Declaring password
+password = b'Vau1Tw@rD3N"
+
+# Generate a random hex string of length 32
+def generate_random_hex(length):
+    random_bytes = secrets.token_bytes(length)
+    random_hex = binascii.hexlify(random_bytes).decode('utf-8')
+    return random_hex
+
 
 # Talk with agent using file descriptor.
+admin_token = generate_random_hex(40)
 
-agent.set_env("ADMIN_TOKEN", ADMIN_TOKEN)
+agent.set_env("ADMIN_TOKEN", admin_token)
 
 
 # Make sure everything is saved inside the environment file
