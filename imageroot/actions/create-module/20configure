@@ -31,6 +31,7 @@ VAULTWARDEN_ADMIN_TOKEN = generate_random_hex(40)
 
 agent.set_env("ADMIN_TOKEN", VAULTWARDEN_ADMIN_TOKEN)
 
+ADMIN_TOKEN = data.get("ADMIN_TOKEN", VAULTWARDEN_ADMIN_TOKEN)
 
 # Make sure everything is saved inside the environment file
 # just before starting systemd unit
