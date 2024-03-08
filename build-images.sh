@@ -14,7 +14,7 @@ images=()
 repobase="${REPOBASE:-ghcr.io/compgeniuses}"
 # Configure the image name
 reponame="vaultwarden"
-vaultwarden_version="1.30.3"
+vaultwarden_version="1.30.5"
 
 # Create a new empty container image
 container=$(buildah from scratch)
