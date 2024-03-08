@@ -48,6 +48,7 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/vaultwarden-app.pid \
     --env=SENDS_ALLOWED=true \
     --env=EMERGENCY_ACCESS_ALLOWED=true \
     --env=WEB_VAULT_ENABLED=true \
+    --env=WEBSOCKET_ENABLED=true \
     --env=SIGNUPS_ALLOWED=false \
     --env=SIGNUPS_VERIFY=true \
     --env=SIGNUPS_VERIFY_RESEND_TIME=3600 \
