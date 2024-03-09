@@ -25,13 +25,14 @@ def generate_random_hex(length):
     random_hex = binascii.hexlify(random_bytes).decode('utf-8')
     return random_hex
 
-
 # Talk with agent using file descriptor.
 VAULTWARDEN_ADMIN_TOKEN = generate_random_hex(40)
 
+echo -n "VAULTWARDEN_ADMIN_TOKEN" | argon2 "$(openssl rand -base64 32)" -e -id -k 65540 -t 3 -p 4
+
 agent.set_env("ADMIN_TOKEN", VAULTWARDEN_ADMIN_TOKEN)
 
-ADMIN_TOKEN = data.get("ADMIN_TOKEN", random_hex)
+ADMIN_TOKEN = data.get("ADMIN_TOKEN", VAULTWARDEN_ADMIN_TOKEN)
 
 # Make sure everything is saved inside the environment file
 # just before starting systemd unit

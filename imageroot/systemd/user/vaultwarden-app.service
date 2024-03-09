@@ -56,6 +56,8 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/vaultwarden-app.pid \
     --env PUSH_ENABLED=false \
     --env PUSH_INSTALLATION_ID=your-push-id \
     --env PUSH_INSTALLATION_KEY=your-push-key \
+    --env PUSH_RELAY_URI=https://push.bitwarden.eu \
+    --env PUSH_IDENTITY_URI=https://identity.bitwarden.eu \
     ${SERVER_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/vaultwarden-app.ctr-id -t 10
 ExecReload=/usr/bin/podman kill -s HUP vaultwarden-app
