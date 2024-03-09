@@ -33,14 +33,14 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/vaultwarden-app.pid \
     --env=vaultwarden_* \
     --env DOMAIN=${DOMAIN} \
     --env ADMIN_TOKEN=${VAULTWARDEN_ADMIN_TOKEN} \
-    --env SMTP_HOST=smtppro.zoho.com \
-    --env SMTP_FROM=resources@genius-dynamics.com \
-    --env SMTP_FROM_NAME=vaultwarden \
-    --env SMTP_SECURITY=starttls \
-    --env SMTP_PORT=587 \
-    --env SMTP_USERNAME=resources@genius-dynamics.com \
-    --env SMTP_PASSWORD=5ecurE_resources \
-    --env SMTP_AUTH_MECHANISM=${SMTP_AUTH_MECHANISM} \
+    --env=SMTP_HOST={SMTP_HOST} \
+    --env=SMTP_FROM={SMTP_FROM} \
+    --env=SMTP_FROM_NAME=${SMTP_FROM_NAME} \
+    --env=SMTP_SECURITY=${SMTP_ENCRYPTION} \
+    --env=SMTP_PORT=${SMTP_PORT} \
+    --env=SMTP_USERNAME=${SMTP_USERNAME} \
+    --env=SMTP_PASSWORD=${SMTP_PASSWORD} \
+    --env=SMTP_AUTH_MECHANISM=${SMTP_AUTH_MECHANISM} \
     --env LOGIN_RATELIMIT_MAX_BURST=10 \
     --env LOGIN_RATELIMIT_SECONDS=60 \
     --env ADMIN_RATELIMIT_MAX_BURST=10 \
