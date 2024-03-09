@@ -29,37 +29,15 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/vaultwarden-app.pid \
     --pod-id-file %t/vaultwarden.pod-id --replace -d --name  vaultwarden-app \
     --volume=vaultwarden-data:/data \
     --env-file=smarthost.env \
-    --env-file=%S/state/environment \
     --env=vaultwarden_* \
-    --env DOMAIN=${DOMAIN} \
-    --env ADMIN_TOKEN=${VAULTWARDEN_ADMIN_TOKEN} \
-    --env=SMTP_HOST={SMTP_HOST} \
-    --env=SMTP_FROM={SMTP_FROM} \
-    --env=SMTP_FROM_NAME=${SMTP_FROM_NAME} \
-    --env=SMTP_SECURITY=${SMTP_ENCRYPTION} \
-    --env=SMTP_PORT=${SMTP_PORT} \
-    --env=SMTP_USERNAME=${SMTP_USERNAME} \
-    --env=SMTP_PASSWORD=${SMTP_PASSWORD} \
-    --env=SMTP_AUTH_MECHANISM=${SMTP_AUTH_MECHANISM} \
-    --env LOGIN_RATELIMIT_MAX_BURST=10 \
-    --env LOGIN_RATELIMIT_SECONDS=60 \
-    --env ADMIN_RATELIMIT_MAX_BURST=10 \
-    --env ADMIN_RATELIMIT_SECONDS=60 \
-    --env SENDS_ALLOWED=true \
-    --env EMERGENCY_ACCESS_ALLOWED=true \
-    --env WEB_VAULT_ENABLED=true \
-    --env WEBSOCKET_ENABLED=true \
-    --env SIGNUPS_ALLOWED=false \
-    --env SIGNUPS_VERIFY=true \
-    --env SIGNUPS_VERIFY_RESEND_TIME=3600 \
-    --env SIGNUPS_VERIFY_RESEND_LIMIT=5 \
-    --env INVITATIONS_ALLOWED=false \
-    --env SHOW_PASSWORD_HINT=false \
-    --env PUSH_ENABLED=false \
-    --env PUSH_INSTALLATION_ID=your-push-id \
-    --env PUSH_INSTALLATION_KEY=your-push-key \
-    --env PUSH_RELAY_URI=https://push.bitwarden.eu \
-    --env PUSH_IDENTITY_URI=https://identity.bitwarden.eu \
+    --env SMTP_HOST=${SMTP_HOST} \
+    --env SMTP_FROM=${SMTP_FROM} \
+    --env SMTP_FROM_NAME=${SMTP_FROM_NAME} \
+    --env SMTP_SECURITY=${SMTP_ENCRYPTION} \
+    --env SMTP_PORT=${SMTP_PORT} \
+    --env SMTP_USERNAME=${SMTP_USERNAME} \
+    --env SMTP_PASSWORD=${SMTP_PASSWORD} \
+    --env SMTP_AUTH_MECHANISM=${SMTP_AUTH_MECHANISM} \
     ${SERVER_IMAGE}
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/vaultwarden-app.ctr-id -t 10
 ExecReload=/usr/bin/podman kill -s HUP vaultwarden-app
