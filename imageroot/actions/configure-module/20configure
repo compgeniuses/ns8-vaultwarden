@@ -12,6 +12,11 @@ import agent
 
 data = json.load(sys.stdin)
 
+
+# vaultwarden domain settings
+host = data.get("host", "")
+DOMAIN = "https://"+host
+
 # Define missing variables
 SENDS_ALLOWED = data.get("SENDS_ALLOWED", "")
 EMERGENCY_ACCESS_ALLOWED = data.get("EMERGENCY_ACCESS_ALLOWED", "")
@@ -28,11 +33,6 @@ PUSH_IDENTITY_URI = data.get("PUSH_IDENTITY_URI", "")
 PUSH_INSTALLATION_ID = data.get("PUSH_INSTALLATION_ID", "")
 PUSH_INSTALLATION_KEY = data.get("PUSH_INSTALLATION_KEY", "")
 SHOW_PASSWORD_HINT = data.get("SHOW_PASSWORD_HINT", "")
-
-# vaultwarden domain settings
-host = data.get("host", "")
-DOMAIN = "https://"+host
-
 
 # Setup configuration from user input.
 agent.set_env("DOMAIN", DOMAIN)
