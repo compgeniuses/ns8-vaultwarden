@@ -5,12 +5,14 @@
     "description": "Configure vaultwarden",
     "examples": [
         {
+            "host": "vaultwarden.domain.org",
+            "http2https": true,
+            "lets_encrypt": true,
             "EMERGENCY_ACCESS_ALLOWED": true,
             "WEB_VAULT_ENABLED": false,
             "SIGNUPS_ALLOWED": false,
             "SIGNUPS_VERIFY": true,
-            "SIGNUPS_DOMAINS_WHITELIST": "vaultwarden.domain.org,vaultwarden.org",
-            "host": "vaultwarden.domain.org"
+            "SIGNUPS_DOMAINS_WHITELIST": "vaultwarden.domain.org"
         }
     ],
     "type": "object",
