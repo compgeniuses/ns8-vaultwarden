@@ -34,7 +34,7 @@ config["SHOW_PASSWORD_HINT"] = os.getenv("SHOW_PASSWORD_HINT") == "False"
 config["PUSH_ENABLED"] = os.getenv("PUSH_ENABLED") == "False"
 config["PUSH_INSTALLATION_ID"] = os.getenv("PUSH_INSTALLATION_ID","")
 config["PUSH_INSTALLATION_KEY"] = os.getenv("PUSH_INSTALLATION_KEY","")
-config["PUSH_RELAY_URI"] = os.getenv("PUSH_RELAY_URI","5")
-config["PUSH_IDENTITY_URI"] = os.getenv("PUSH_IDENTITY_URI","5")
+config["PUSH_RELAY_URI"] = os.getenv("PUSH_RELAY_URI","")
+config["PUSH_IDENTITY_URI"] = os.getenv("PUSH_IDENTITY_URI","")
 config["ADMIN_TOKEN"] = os.getenv("VAULTWARDEN_ADMIN_TOKEN","")
 json.dump(config, fp=sys.stdout)

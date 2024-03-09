@@ -4,35 +4,30 @@
 # Copyright (C) 2023 Nethesis S.r.l.
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-# from pyargon2 import hash
 import os
 import json
 import sys
-# agent is a NethServer library which provides function to communicate with the agent
 import agent
 import secrets
-import bcrypt
-import pyargon2.hash
+import pyargon2
+import binascii
 
 data = json.load(sys.stdin)
 
-# Declaring password
-#password = b'Vau1Tw@rD3N"
-
-# Generate a random hex string of length 32
+# Generate a random hex string of length 40
 def generate_random_hex(length):
     random_bytes = secrets.token_bytes(length)
     random_hex = binascii.hexlify(random_bytes).decode('utf-8')
     return random_hex
 
-# Talk with agent using file descriptor.
-VAULTWARDEN_ADMIN_TOKEN = generate_random_hex(40)
+# Generate a random admin token
+VAULTWARDEN_ADMIN_TOKEN = generate_random_hex(20)
 
-echo -n "VAULTWARDEN_ADMIN_TOKEN" | argon2 "$(openssl rand -base64 32)" -e -id -k 65540 -t 3 -p 4
+# Hash the admin token using Argon2
+hashed_admin_token = pyargon2.hash.hash_password(VAULTWARDEN_ADMIN_TOKEN)
 
-agent.set_env("ADMIN_TOKEN", VAULTWARDEN_ADMIN_TOKEN)
-
-ADMIN_TOKEN = data.get("ADMIN_TOKEN", VAULTWARDEN_ADMIN_TOKEN)
+# Set the environment variable
+agent.set_env("ADMIN_TOKEN", hashed_admin_token)
 
 # Make sure everything is saved inside the environment file
 # just before starting systemd unit
