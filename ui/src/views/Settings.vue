@@ -220,7 +220,7 @@ export default {
         if (isValidationOk) {
           this.focusElement("ADMIN_TOKEN");
         }
-        isValidationOk = true;
+        isValidationOk = false;
       }
 
       return isValidationOk;
