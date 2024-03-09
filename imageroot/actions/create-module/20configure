@@ -17,7 +17,7 @@ import pyargon2.hash
 data = json.load(sys.stdin)
 
 # Declaring password
-password = b'Vau1Tw@rD3N"
+#password = b'Vau1Tw@rD3N"
 
 # Generate a random hex string of length 32
 def generate_random_hex(length):
