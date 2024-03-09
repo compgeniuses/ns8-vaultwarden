@@ -32,7 +32,13 @@
     "enabled": "Enabled",
     "http_to_https": "http2https",
     "save": "Save",
-    "test_field": "Test field"
+    "test_field": "Test field",
+    "advanced": "Advanced",
+    "configuring": "Configuring",
+    "instance_configuration": "Configure kickstart",
+    "domain_already_used_in_traefik": "Domain already used in traefik",
+    "host_pattern": "Must be a valid fully qualified domain name",
+    "host_format": "Must be a valid fully qualified domain name"
   },
   "about": {
     "title": "About"
