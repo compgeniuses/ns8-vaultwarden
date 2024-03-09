@@ -11,6 +11,7 @@ import agent
 import secrets
 import pyargon2
 import binascii
+import subprocess
 
 data = json.load(sys.stdin)
 
@@ -28,6 +29,21 @@ hashed_admin_token = pyargon2.hash.hash_password(VAULTWARDEN_ADMIN_TOKEN)
 
 # Set the environment variable
 agent.set_env("ADMIN_TOKEN", hashed_admin_token)
+
+#======= Attempt using sub Proc========
+# Execute the command to hash the admin token using Argon2 and print the result
+proc = subprocess.Popen(
+    ["echo", "-n", VAULTWARDEN_ADMIN_TOKEN],
+    stdout=subprocess.PIPE,
+)
+hashed_admin_token = subprocess.check_output(
+    ["argon2", "$(openssl rand -base64 32)", "-e", "-id", "-k", "65540", "-t", "3", "-p", "4"],
+    stdin=proc.stdout,
+    text=True
+)
+
+# Set the environment variable
+agent.set_env("ADMIN_TOKEN", hashed_admin_token.strip())
 
 # Make sure everything is saved inside the environment file
 # just before starting systemd unit
