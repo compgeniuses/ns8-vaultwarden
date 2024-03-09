@@ -20,7 +20,7 @@ VAULTWARDEN_ADMIN_TOKEN = generate_random_hex(20)
 # Execute the vaultwarden CLI command to hash the admin token
 try:
    hashed_admin_token = subprocess.check_output(
-       ["/usr/bin/podman", "exec", "-i", "vaultwarden", "/vaultwarden", "hash"],
+       ["/usr/bin/podman", "exec", "-i", "vaultwarden-app", "/vaultwarden", "hash"],
        input=VAULTWARDEN_ADMIN_TOKEN.encode(),
         text=True
     ).strip()
