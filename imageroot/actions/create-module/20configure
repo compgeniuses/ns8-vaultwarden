@@ -11,6 +11,32 @@ import agent
 import secrets
 import pyargon2
 import binascii
+import subprocess
+
+try:
+    import pyargon2
+except ModuleNotFoundError:
+    print("pyargon2 not found. Attempting to install...")
+
+    # Try pip install
+    try:
+        subprocess.run(["pip", "install", "pyargon2"], check=True)
+    except subprocess.CalledProcessError:
+        # If pip install fails, try pip3 install
+        try:
+            subprocess.run(["pip3", "install", "pyargon2"], check=True)
+        except subprocess.CalledProcessError:
+            print("Failed to install pyargon2. Please install it manually.")
+            sys.exit(1)
+
+    # Try importing pyargon2 again
+    try:
+        import pyargon2
+    except ModuleNotFoundError:
+        print("pyargon2 installation successful but import still failed.")
+        sys.exit(1)
+
+# Now pyargon2 is successfully imported, continue with your script
 
 data = json.load(sys.stdin)
 
