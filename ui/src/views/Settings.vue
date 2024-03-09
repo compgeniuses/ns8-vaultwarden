@@ -220,7 +220,7 @@ export default {
         if (isValidationOk) {
           this.focusElement("ADMIN_TOKEN");
         }
-        isValidationOk = false;
+        isValidationOk = true;
       }
 
       return isValidationOk;
@@ -275,7 +275,7 @@ export default {
           action: taskAction,
           data: {
             host: this.host,
-            ADMIN_TOKEN: this.ADMIN_TOKEND,
+            ADMIN_TOKEN: this.ADMIN_TOKEN,
             lets_encrypt: this.isLetsEncryptEnabled,
             http2https: this.isHttpToHttpsEnabled,
           },
