@@ -1,0 +1,36 @@
+import os
+import json
+import sys
+import agent
+import secrets
+import subprocess
+import binascii
+
+data = json.load(sys.stdin)
+
+# Generate a random hex string of length 40
+def generate_random_hex(length):
+    random_bytes = secrets.token_bytes(length)
+    random_hex = binascii.hexlify(random_bytes).decode('utf-8')
+    return random_hex
+
+# Generate a random admin token
+VAULTWARDEN_ADMIN_TOKEN = generate_random_hex(20)
+
+# Execute the vaultwarden CLI command to hash the admin token
+try:
+    hashed_admin_token = subprocess.check_output(
+        ["podman", "exec", "-i", "vaultwarden", "/vaultwarden", "hash"],
+        input=VAULTWARDEN_ADMIN_TOKEN.encode(),
+        text=True
+    ).strip()
+except subprocess.CalledProcessError as e:
+    print("Error executing vaultwarden hash command:", e)
+    sys.exit(1)
+
+# Set the environment variable
+agent.set_env("ADMIN_TOKEN", hashed_admin_token)
+
+# Make sure everything is saved inside the environment file
+# just before starting systemd unit
+agent.dump_env()
