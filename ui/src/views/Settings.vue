@@ -35,7 +35,7 @@
               v-model="ADMIN_TOKEN"
               class="mg-bottom"
               :invalid-message="$t(error.ADMIN_TOKEN)"
-              :disabled="loading.getConfiguration || loading.configureModule"
+              :disabled="true"
               type="password"
               ref="ADMIN_TOKEN"
             >
