@@ -214,15 +214,6 @@ export default {
         isValidationOk = false;
       }
 
-      if (!this.ADMIN_TOKEN) {
-        this.error.ADMIN_TOKEN = "common.required";
-
-        if (isValidationOk) {
-          this.focusElement("ADMIN_TOKEN");
-        }
-        isValidationOk = false;
-      }
-
       return isValidationOk;
     },
     configureModuleValidationFailed(validationErrors) {
