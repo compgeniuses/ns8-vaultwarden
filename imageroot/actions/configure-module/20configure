@@ -51,12 +51,12 @@ agent.set_env("LOGIN_RATELIMIT_SECONDS", "60")
 agent.set_env("ADMIN_RATELIMIT_MAX_BURST", "10")
 agent.set_env("ADMIN_RATELIMIT_SECONDS", "60")
 # push
-agent.set_env("SHOW_PASSWORD_HINT")
-agent.set_env("PUSH_ENABLED")
-agent.set_env("PUSH_INSTALLATION_ID")
-agent.set_env("PUSH_INSTALLATION_KEY")
-agent.set_env("PUSH_RELAY_URI")
-agent.set_env("PUSH_IDENTITY_URI")
+agent.set_env("SHOW_PASSWORD_HINT", SHOW_PASSWORD_HINT)
+agent.set_env("PUSH_ENABLED", PUSH_ENABLED)
+agent.set_env("PUSH_INSTALLATION_ID", PUSH_INSTALLATION_ID)
+agent.set_env("PUSH_INSTALLATION_KEY", PUSH_INSTALLATION_KEY)
+agent.set_env("PUSH_RELAY_URI", PUSH_RELAY_URI)
+agent.set_env("PUSH_IDENTITY_URI",PUSH_IDENTITY_URI)
 # Make sure everything is saved inside the environment file
 # just before starting systemd unit
 agent.dump_env()
