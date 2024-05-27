@@ -26,7 +26,7 @@ ExecStartPre=-runagent discover-smarthost
 ExecStart=/usr/bin/podman run --conmon-pidfile %t/vaultwarden-app.pid \
     --cidfile %t/vaultwarden-app.ctr-id --cgroups=no-conmon \
     --pod-id-file %t/vaultwarden.pod-id --replace -d --name  vaultwarden-app \
-    --volume vaultwarden-data:/data \
+    --volume vaultwarden-data:/data:Z \
     --env-file=smarthost.env \
     --env=vaultwarden_* \
     --env SMTP_HOST=${SMTP_HOST} \
@@ -37,6 +37,8 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/vaultwarden-app.pid \
     --env SMTP_USERNAME=${SMTP_USERNAME} \
     --env SMTP_PASSWORD=${SMTP_PASSWORD} \
     --env SMTP_AUTH_MECHANISM=${SMTP_AUTH_MECHANISM} \
+    --env LOG_FILE=/data/vaultwarden.log \
+    --env WEBSOCKET_ENABLED=true \
     ${SERVER_IMAGE}
 
 #ExecStartPost=/usr/bin/bash -c "while ! /usr/bin/podman exec vaultwarden-app /usr/bin/curl  http://127.0.0.1:80/vaultwarden ; do sleep 3 ; done"
