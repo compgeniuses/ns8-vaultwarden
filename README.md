@@ -11,7 +11,11 @@ The output of the command will return the instance name.
 Output example:
 
     {"module_id": "vaultwarden", "image_name": "vaultwarden", "image_url": "ghcr.io/compgeniuses/vaultwarden:latest"}
+## Update Module
 
+```shell
+api-cli run update-module --data '{"module_url":"ghcr.io/compgeniuses/vaultwarden:latest","instances":["vaultwarden"],"force":true}'
+```
 ## Configure
 
 Let's assume that the vaultwarden instance is named `vaultwarden1`.

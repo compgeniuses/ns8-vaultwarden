@@ -30,6 +30,7 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/vaultwarden-app.pid \
     --volume=vaultwarden-data:/data \
     --env-file=smarthost.env \
     --env=vaultwarden_* \
+    --env ADMIN_TOKEN='$argon2id$v=19$m=65540,t=3,p=4$IQ53CyVAaAV6HOqAZ/onhbQp3CKQVoFJv8STXus/dus$jgEnOkJyMrsISMaznPN4z5I2/xMQ/JYCD+wEqTTJ8OA' \
     --env SMTP_HOST=${SMTP_HOST} \
     --env SMTP_FROM=${SMTP_FROM} \
     --env SMTP_FROM_NAME=${SMTP_FROM_NAME} \
