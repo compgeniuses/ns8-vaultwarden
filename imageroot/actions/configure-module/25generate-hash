@@ -30,7 +30,7 @@ hashed_admin_token = ""
 try:
     hashed_admin_token = subprocess.check_output(
         ["/usr/bin/podman", "exec", "-i", "vaultwarden-app", "/vaultwarden", "hash"],
-        input=VAULTWARDEN_ADMIN_TOKEN.encode(),
+        input=VAULTWARDEN_ADMIN_TOKEN,
         text=True
     ).strip()
 except subprocess.CalledProcessError as e:
