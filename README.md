@@ -5,7 +5,9 @@ vaultwarden is a community-supported open-source document management system that
 
 Instantiate the module with:
 
+   ```shell
     add-module ghcr.io/compgeniuses/vaultwarden:latest 1
+   ```
 
 The output of the command will return the instance name.
 Output example:
