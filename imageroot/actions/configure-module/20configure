@@ -16,6 +16,15 @@ data = json.load(sys.stdin)
 # vaultwarden domain settings
 host = data.get("host", "")
 DOMAIN = "https://"+host
+# Testing SMTP Settings on Enviroment
+rdb = agent.redis_connect(use_replica=True)
+smtp_settings = agent.get_smarthost_settings(rdb)
+agent.set_env("SMTP_HOST", smtp_settings['host'])
+agent.set_env("SMTP_PORT", smtp_settings['port'])
+agent.set_env("SMTP_USERNAME", smtp_settings['username'])
+agent.set_env("SMTP_PASSWORD", smtp_settings['password'])
+agent.set_env("SMTP_ENCRYPTION", smtp_settings['encrypt_smtp'])
+agent.set_env("SMTP_FROM", smtp_settings['username'])
 
 # Define missing variables
 SENDS_ALLOWED = data.get("SENDS_ALLOWED", "")
@@ -57,6 +66,7 @@ agent.set_env("PUSH_INSTALLATION_ID", PUSH_INSTALLATION_ID)
 agent.set_env("PUSH_INSTALLATION_KEY", PUSH_INSTALLATION_KEY)
 agent.set_env("PUSH_RELAY_URI", PUSH_RELAY_URI)
 agent.set_env("PUSH_IDENTITY_URI",PUSH_IDENTITY_URI)
+
 # Make sure everything is saved inside the environment file
 # just before starting systemd unit
 agent.dump_env()
