@@ -30,7 +30,6 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/vaultwarden-app.pid \
     --env-file=smarthost.env \
     --env=vaultwarden_* \
     --env USE_SENDMAIL=false \
-#    --env SENDMAIL_COMMAND=/usr/sbin/sendmail \
     --env SMTP_HOST=${SMTP_HOST} \
     --env SMTP_FROM=${SMTP_FROM} \
     --env SMTP_FROM_NAME=${SMTP_FROM_NAME} \
@@ -40,7 +39,8 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/vaultwarden-app.pid \
     --env SMTP_PASSWORD=${SMTP_PASSWORD} \
     --env SMTP_AUTH_MECHANISM=${SMTP_AUTH_MECHANISM} \
     --env LOG_FILE=/data/vaultwarden.log \
-    --env WEBSOCKET_ENABLED=true \
+    --env WEBSOCKET_ENABLED=true
+#    --env SENDMAIL_COMMAND=/usr/sbin/sendmail \
     ${SERVER_IMAGE}
 
 #ExecStartPost=/usr/bin/bash -c "while ! /usr/bin/podman exec vaultwarden-app /usr/bin/curl  http://127.0.0.1:80/vaultwarden ; do sleep 3 ; done"
